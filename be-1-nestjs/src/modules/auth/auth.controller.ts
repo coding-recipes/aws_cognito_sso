@@ -1,8 +1,7 @@
 import { Controller, Get, Post, Body, Query } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
-import { GetTokensDto } from './auth.dtos';
-import { Tokens } from './auth.entities';
+import { Tokens, GetTokensDto } from './auth.dtos';
 
 @Controller('auth')
 export class AuthController {

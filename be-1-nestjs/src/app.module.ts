@@ -6,8 +6,7 @@ import { config } from './config'
 import { DatabaseConnectionService } from './setupTypeorm';
 import { AppService } from './app.service';
 
-import { AuthModule } from './modules/auth/auth.module';
-import { StatModule } from './modules/stat/stat.module';
+import { AuthModule, StatModule } from './modules';
 
 @Module({
   imports: [

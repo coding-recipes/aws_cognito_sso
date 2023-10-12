@@ -1,10 +1,8 @@
 import axios from 'axios';
 import { GetTokensDto } from './auth.dtos';
-import { AuthorizationCodeResponse } from './auth.types'
+import { AuthorizationCodeResponse } from './auth.dtos'
 
 export async function reqGetTokens({ code, redirectUri }: GetTokensDto): Promise<AuthorizationCodeResponse> {
-  console.log({ code, redirectUri });
-
   const url = process.env.COGNITO_ENDPOINT + process.env.COGNITO_TOKEN_ROUTE
   const client_id = process.env.COGNITO_CLIENT_ID
   const client_secret = process.env.COGNITO_CLIENT_SECRET

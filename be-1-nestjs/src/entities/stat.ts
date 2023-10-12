@@ -9,7 +9,7 @@ import {
 
 
 @Entity('stats')
-export class Stats extends BaseEntity {
+export class Stat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -34,10 +34,3 @@ export class Stats extends BaseEntity {
   @UpdateDateColumn({ name: 'modified_date', type: 'datetime' })
   lastModifiedDate: string;
 }
-
-
-// @ManyToOne(() => Questionnaire, (questionnaire) => questionnaire.categories)
-// questionnaire: Questionnaire;
-
-// @OneToMany(() => Question, (question) => question.category)
-// questions: Question[];
