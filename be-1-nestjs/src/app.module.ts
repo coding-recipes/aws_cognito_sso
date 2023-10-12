@@ -1,12 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm'
-import { AuthModule } from './auth/auth.module';
 import { config } from './config'
 
 import { DatabaseConnectionService } from './setupTypeorm';
 import { AppService } from './app.service';
-import { StatModule } from './stat/stat.module';
+
+import { AuthModule } from './modules/auth/auth.module';
+import { StatModule } from './modules/stat/stat.module';
 
 @Module({
   imports: [
