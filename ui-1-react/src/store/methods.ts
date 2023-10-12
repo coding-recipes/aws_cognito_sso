@@ -11,17 +11,16 @@ export const getStoreKeys = () => {
 export const getStoreState = () => {
   return useStore.getState()
 }
+
 export const getStoreItem = (key: keyof StoreState) => {
   return useStore.getState()[key]
 }
 
-
 export const setStoreState = (partialState: Partial<StoreState>) => {
   useStore.setState(partialState);
 }
+
+// ------------ user ------------
 export const setUser = (user?: StoreState["user"]) => {
   useStore.setState({ user })
-}
-export const setAuthCode = (authCode?: StoreState["authCode"]) => {
-  useStore.setState({ authCode })
 }

@@ -1,9 +1,9 @@
-import { AfterAuthPage } from '../auth';
+import { SignInHandler } from '../auth';
 import { FullLoader } from '../atoms';
 
 export default function Page() {
   return <>
-    <AfterAuthPage
+    <SignInHandler
       onLoading={<FullLoader text="signing in..." />}
       onFailed={<FullLoader text="Sing in failed!" />}
     />

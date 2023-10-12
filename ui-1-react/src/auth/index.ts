@@ -1,2 +1,3 @@
 export { ProtectedRoute } from './ProtectedRoute';
-export { AfterAuthPage } from './authProcess'
+export { SignInHandler } from './SignInHandler'
+export * from './auth.store'

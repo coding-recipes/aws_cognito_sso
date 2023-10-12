@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { redirectToSSO } from "./authProcess";
 import { FullLoader } from "../atoms";
+import { redirectToSSO } from "./auth.utils";
 
 export const RedirectAuthDeferred = ({ callbackPage = "", timeoutSec = 1 }: { callbackPage?: string, timeoutSec?: number }) => {
   const [redirect, setRedirect] = React.useState<boolean>(false);
