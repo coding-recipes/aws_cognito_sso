@@ -4,16 +4,18 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
+  Unique
 } from 'typeorm';
 
 
 @Entity('stats')
+// @Unique(['kpi', 'period'])
 export class Stat extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ unique: true })
+  @Column({ type: 'varchar', length: 50, })
   kpi: string;
 
   @Column({ type: 'varchar', length: 12, unique: false })

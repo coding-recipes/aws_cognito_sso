@@ -1,19 +1,22 @@
 export const config = () => ({
   app: {
     name: process.env.APP_NAME || 'Demo app',
-    port: process.env.PORT || 8001
+    port: +process.env.PORT || 8001
   },
   database: {
-    name: process.env.DATABASE_NAME,
-    type: process.env.DATABASE_TYPE,
-    database: process.env.DATABASE_DB,
+    name: process.env.DATABASE_NAME || '',
+    type: process.env.DATABASE_TYPE || '',
+    database: process.env.DATABASE_DB || '',
     synchronize: process.env.DATABASE_SYNC == "true",
-    dropSchema: true,
+    dropSchema: false,
     logging: true,
-    entities: ['dist/**/*.entity.js', 'dist/entity/*.js'],
+    entities: ['dist/entity/*.js', 'dist/entities/*.js', 'dist/**/*.entity.js'],
     // entities: ['dist/entities/*.js'],
     // migrations: ['dist/migration/**/*.js'],
     // subscribers: ['dist/subscriber/**/*.js']
+    // migrations: ["migration/*.js"],
+    migrations: ["dist/migration/*.js"],
+    // cli: { migrationsDir: "migration" }
   },
   swagger: {
     title: "NestJS Auth API",
