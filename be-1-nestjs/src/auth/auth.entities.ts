@@ -2,11 +2,11 @@ import { ApiProperty } from '@nestjs/swagger';
 
 export class Tokens {
   @ApiProperty({ example: 'access-token' })
-  access_token: string;
+  accessToken: string;
 
   @ApiProperty({ example: 'refresh-token' })
-  refresh_token: string;
+  refreshToken: string;
 
   @ApiProperty({ nullable: true, type: 'string', example: 'id-token' })
-  id_token: string | undefined;
+  idToken: string | undefined;
 }

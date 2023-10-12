@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
-export class ExchangeCodeDto {
+export class GetTokensDto {
 
   @IsNotEmpty()
   @ApiProperty()
@@ -9,5 +9,5 @@ export class ExchangeCodeDto {
 
   @IsNotEmpty()
   @ApiProperty()
-  redirect_uri: string;
+  redirectUri: string;
 }
