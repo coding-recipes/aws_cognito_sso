@@ -1,14 +1,17 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { swaggerSetup } from './swagger';
 import { ValidationPipe } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { setupSwagger } from './setupSwagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.useGlobalPipes(new ValidationPipe());
-  swaggerSetup(app)
 
-  await app.listen(process.env.PORT || 8001);
+  const configService = app.get(ConfigService);
+  setupSwagger(app, configService.get('swagger'))
+
+  await app.listen(configService.get('app.port'));
 }
 bootstrap();

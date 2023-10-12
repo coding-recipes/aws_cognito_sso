@@ -1,9 +1,9 @@
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { CONFIG } from './config'
+import { SwaggerConfig } from './config'
 import { INestApplication } from '@nestjs/common';
 
-export const swaggerSetup = (app: INestApplication) => {
-  const s = CONFIG.swagger;
+export const setupSwagger = (app: INestApplication, swaggerConfig: SwaggerConfig) => {
+  const s = swaggerConfig;
 
   let b = new DocumentBuilder()
     .setTitle(s.title)
