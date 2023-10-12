@@ -5,7 +5,6 @@ import { AuthModule } from './auth/auth.module';
 import { config } from './config'
 
 import { DatabaseConnectionService } from './setupTypeorm';
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { StatModule } from './stat/stat.module';
 
@@ -19,7 +18,7 @@ import { StatModule } from './stat/stat.module';
     AuthModule,
     StatModule
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [AppService],
 })
 export class AppModule { }
