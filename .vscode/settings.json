@@ -1,0 +1,10 @@
+{
+  "sqltools.connections": [
+    {
+      "previewLimit": 50,
+      "driver": "SQLite",
+      "name": "sso",
+      "database": "\\\\wsl.localhost\\Ubuntu\\home\\peter\\demo\\sso_cognito\\assets\\stats.db"
+    }
+  ]
+}
