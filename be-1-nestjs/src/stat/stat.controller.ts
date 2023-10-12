@@ -5,8 +5,6 @@ export class StatController {
 
   @Get()
   getStats() {
-    return {
-
-    };
+    return { message: 'This action returns all stats' };
   }
 }

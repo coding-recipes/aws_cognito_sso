@@ -7,12 +7,13 @@ export const config = () => ({
     name: process.env.DATABASE_NAME,
     type: process.env.DATABASE_TYPE,
     database: process.env.DATABASE_DB,
-    synchronize: true,
+    synchronize: process.env.DATABASE_SYNC == "true",
     dropSchema: true,
     logging: true,
-    entities: ['dist/entities/*.js'],
-    migrations: ['dist/migration/**/*.js'],
-    subscribers: ['dist/subscriber/**/*.js']
+    entities: ['dist/**/*.entity.js', 'dist/entity/*.js'],
+    // entities: ['dist/entities/*.js'],
+    // migrations: ['dist/migration/**/*.js'],
+    // subscribers: ['dist/subscriber/**/*.js']
   },
   swagger: {
     title: "NestJS Auth API",
