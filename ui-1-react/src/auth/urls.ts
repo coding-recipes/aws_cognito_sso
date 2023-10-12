@@ -5,20 +5,13 @@ const {
   VITE_COGNITO_AUTH_RESPONSE_TYPE,
   VITE_SSO_SIGNIN_REDIRECT_ROUTE,
   // VITE_SSO_SIGNOUT_REDIRECT_ROUTE,
+  VITE_SSO_AUTH_URL_TEMPLATE
 } = import.meta.env;
-
-// const AUTH_URL_TEMPLATE = "https://{domain}.auth.{region}.amazoncognito.com/login?"
-const AUTH_URL_TEMPLATE = "https://{domain}.auth.{region}.amazoncognito.com/oauth2/authorize?"
-  + "client_id={client_id}"
-  + "&"
-  + "response_type={response_type}"
-  + "&"
-  + "redirect_uri={redirect_uri}"
 
 export const getSSOauthUrl = (redirectRoute: string = VITE_SSO_SIGNIN_REDIRECT_ROUTE) => {
   const _redirectUri = window.location.origin + "/" + redirectRoute;
   const redirectUri = encodeURIComponent(_redirectUri);
-  const authUrl = AUTH_URL_TEMPLATE
+  const authUrl = VITE_SSO_AUTH_URL_TEMPLATE
     .replace('{domain}', VITE_COGNITO_DOMAIN_NAME)
     .replace('{region}', VITE_COGNITO_REGION)
     .replace('{response_type}', VITE_COGNITO_AUTH_RESPONSE_TYPE)
