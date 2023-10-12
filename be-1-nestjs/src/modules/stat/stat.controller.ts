@@ -1,9 +1,11 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, UseGuards } from '@nestjs/common';
 import { ApiCreatedResponse } from '@nestjs/swagger';
 import { StatService } from './stat.service';
-import { Stat } from '@/entities';
+import { Stat } from './stat.entity';
+import { AuthGuard } from '@/modules/auth';
 
 @Controller('stats')
+@UseGuards(AuthGuard)
 export class StatController {
   constructor(private readonly statService: StatService) { }
 

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { StatController } from './stat.controller';
 import { StatService } from './stat.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Stat } from '../../entities';
+import { Stat } from './stat.entity';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Stat])],
