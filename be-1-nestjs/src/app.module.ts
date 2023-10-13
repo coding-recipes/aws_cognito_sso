@@ -8,6 +8,7 @@ import { DatabaseConnectionService } from './setupTypeorm';
 
 import { AuthModule } from './auth';
 import { StatModule } from './stat';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -17,7 +18,8 @@ import { StatModule } from './stat';
       useClass: DatabaseConnectionService
     }),
     AuthModule,
-    StatModule
+    StatModule,
+    UserModule
   ],
   controllers: [],
   providers: [AppService],
