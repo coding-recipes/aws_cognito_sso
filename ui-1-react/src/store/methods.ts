@@ -19,8 +19,3 @@ export const getStoreItem = (key: keyof StoreState) => {
 export const setStoreState = (partialState: Partial<StoreState>) => {
   useStore.setState(partialState);
 }
-
-// ------------ user ------------
-export const setUser = (user?: StoreState["user"]) => {
-  useStore.setState({ user })
-}

@@ -5,9 +5,12 @@ import SignIn from '../pages/SignIn';
 import SignOut from '../pages/SignOut';
 import Data from '../pages/Data';
 import { ProtectedRoute } from '../auth';
+import { GlobalComponents } from './globals'
 
 export const AppRoutes = () => {
   return <>
+    <GlobalComponents />
+
     <Routes>
       <Route path="signin" element={<SignIn />} />
       <Route path="signout" element={<SignOut />} />
