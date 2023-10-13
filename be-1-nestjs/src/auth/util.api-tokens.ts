@@ -2,8 +2,8 @@ import { Request, Response } from 'express';
 
 export const getRequestTokens = (request: Request): { accessToken: string, refreshToken: string } => {
   const accessToken0 = request.headers.authorization?.split(' ')[1];
-  const accessToken1 = request.headers['x-access-token'][0]
-  const refreshToken1 = request.headers['x-refresh-token'][0]
+  const accessToken1 = request.headers['x-access-token'] as string;
+  const refreshToken1 = request.headers['x-refresh-token'] as string;
   const accessToken = accessToken0 || accessToken1
   const refreshToken = refreshToken1
   return { accessToken, refreshToken }
