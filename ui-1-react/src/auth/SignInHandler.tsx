@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
-import { getCBPage } from "./auth.utils";
 import { reqGetTokens } from "./auth.reqs";
 import { setTokens } from "./auth.store";
+import { getCBPage } from "./util.app";
 
 export type AuthStatus = 'init' | 'authCode' | 'success' | 'error'
 let requestSent: boolean = false // to prevent React DevTools from calling this twice

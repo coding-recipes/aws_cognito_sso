@@ -1,5 +1,6 @@
 import axios from "axios";
-import { getApiCodeExchangeUrl, redirectToSsLogout, signInRedirectUrl } from "./auth.utils";
+import { getApiCodeExchangeUrl, signInRedirectUrl } from "./util.urls";
+import { redirectToSsLogout, redirectToSsoAuth } from "./util.sso";
 import { Tokens } from "./auth.store";
 
 const _getTokensReqInputs = async (code: string) => {
@@ -24,4 +25,8 @@ export const reqGetTokensPost = async (code: string): Promise<Tokens> => {
 
 export const signOut = () => {
   redirectToSsLogout("/")
+}
+
+export const signIn = () => {
+  redirectToSsoAuth("/")
 }
