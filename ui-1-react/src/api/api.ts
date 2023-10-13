@@ -22,7 +22,7 @@ export const apiRequest = async <T>({ method, route, params = {}, headers = {} }
     ...headers,
     Authorization: `Bearer ${accessToken}`,
     "x-refresh-token": refreshToken,
-    // "x-access-token": accessToken,
+    "x-access-token": accessToken,
   }
 
   const response = await axios.request<T>({ method, url, headers, params })

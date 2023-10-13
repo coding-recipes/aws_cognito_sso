@@ -1,16 +1,6 @@
-import {
-  useQuery,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from "react-query";
-
+import { useQuery, useQueryClient } from "react-query";
 import { getStats } from "../api";
-
-function useStats() {
-  return useQuery("stats", getStats);
-}
-
+import { Button } from "@chakra-ui/react";
 
 export default function Page() {
   return <div className='content-container'>
@@ -25,10 +15,17 @@ export default function Page() {
 }
 
 function DataTable() {
-  const { status, data, error, isFetching } = useStats();
+  const queryClient = useQueryClient()
+  const queryKey = "stats"
+  const { status, data, error, isFetching } = useQuery(queryKey, getStats);
+  const refresh = () => {
+    queryClient.invalidateQueries(queryKey)
+  }
 
   return status == "success" && <>
     <div>status: {status}</div>
     <div>len: {data?.length}</div>
+    <div><Button onClick={refresh}>Refresh</Button></div>
+    <div>{JSON.stringify(data)}</div>
   </>
 }
