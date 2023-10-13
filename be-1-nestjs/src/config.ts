@@ -1,7 +1,7 @@
 export const config = () => ({
   app: {
     name: process.env.APP_NAME || 'Demo app',
-    port: +process.env.PORT || 8001
+    port: +process.env.PORT || 8000
   },
   database: {
     name: process.env.DATABASE_NAME || '',
