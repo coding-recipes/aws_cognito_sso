@@ -6,7 +6,7 @@ import { setupSwagger } from './setupSwagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({ exposedHeaders: ['x-access-token', 'x-refresh-token'] });
   app.useGlobalPipes(new ValidationPipe());
 
   const configService = app.get(ConfigService);
