@@ -9,7 +9,7 @@ export const config = () => ({
     database: process.env.DATABASE_DB || '',
     synchronize: process.env.DATABASE_SYNC == "true",
     dropSchema: false,
-    logging: true,
+    logging: false,
     entities: ['dist/entity/*.js', 'dist/entities/*.js', 'dist/**/*.entity.js'],
     // entities: ['dist/entities/*.js'],
     // migrations: ['dist/migration/**/*.js'],

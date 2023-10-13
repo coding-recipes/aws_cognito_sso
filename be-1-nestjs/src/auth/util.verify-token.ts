@@ -5,11 +5,8 @@
 import { promisify } from 'util';
 import * as Axios from 'axios';
 import * as jsonwebtoken from 'jsonwebtoken';
-const jwkToPem = require('jwk-to-pem');
-
-export interface ClaimVerifyRequest {
-  readonly token?: string;
-}
+import * as jwkToPem from 'jwk-to-pem';
+import { config } from '@/config'
 
 export interface ClaimVerifyResult {
   readonly userName: string;
@@ -52,16 +49,16 @@ interface Claim {
   client_id: string;
 }
 
-const cognitoPoolId = process.env.COGNITO_POOL_ID || '';
-if (!cognitoPoolId) {
-  throw new Error('env var required for cognito pool');
+const cognitoIssuer = () => {
+  const { poolId, clientRegion } = config().cognito
+  return `https://cognito-idp.${clientRegion}.amazonaws.com/${poolId}`;
 }
-const cognitoIssuer = `https://cognito-idp.us-east-1.amazonaws.com/${cognitoPoolId}`;
+
 
 let cacheKeys: MapOfKidToPublicKey | undefined;
 const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
   if (!cacheKeys) {
-    const url = `${cognitoIssuer}/.well-known/jwks.json`;
+    const url = `${cognitoIssuer()}/.well-known/jwks.json`;
     const publicKeys = await Axios.default.get<PublicKeys>(url);
     cacheKeys = publicKeys.data.keys.reduce((agg, current) => {
       const pem = jwkToPem(current);
@@ -76,17 +73,17 @@ const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
 
 const verifyPromised = promisify(jsonwebtoken.verify.bind(jsonwebtoken));
 
-const handler = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> => {
+const handler = async (token: string): Promise<ClaimVerifyResult> => {
   let result: ClaimVerifyResult;
   try {
-    console.log(`user claim verify invoked for ${JSON.stringify(request)}`);
-    const token = request.token;
+    console.log(`user claim verify invoked for ${token.substring(0, 8)}...`);
     const tokenSections = (token || '').split('.');
     if (tokenSections.length < 2) {
       throw new Error('requested token is invalid');
     }
     const headerJSON = Buffer.from(tokenSections[0], 'base64').toString('utf8');
     const header = JSON.parse(headerJSON) as TokenHeader;
+    console.log('header', header)
     const keys = await getPublicKeys();
     const key = keys[header.kid];
     if (key === undefined) {
@@ -97,7 +94,7 @@ const handler = async (request: ClaimVerifyRequest): Promise<ClaimVerifyResult> 
     if (currentSeconds > claim.exp || currentSeconds < claim.auth_time) {
       throw new Error('claim is expired or invalid');
     }
-    if (claim.iss !== cognitoIssuer) {
+    if (claim.iss !== cognitoIssuer()) {
       throw new Error('claim issuer is invalid');
     }
     if (claim.token_use !== 'access') {
