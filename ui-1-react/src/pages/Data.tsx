@@ -18,6 +18,7 @@ function DataTable() {
   const queryClient = useQueryClient()
   const queryKey = "stats"
   const { status, data, error, isFetching } = useQuery(queryKey, getStats);
+
   const refresh = () => {
     queryClient.invalidateQueries(queryKey)
   }

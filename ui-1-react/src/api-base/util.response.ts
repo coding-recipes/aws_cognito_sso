@@ -3,7 +3,7 @@ import { signOut } from "../auth";
 import { extractResponseTokens } from "./util.tokens";
 import { Headers } from "./types";
 
-export const handleResponse = (response: AxiosResponse) => {
+export const handleResponse = <T>(response: AxiosResponse) => {
   const { status, statusText, data, headers } = response
 
   if (status > 299) {
@@ -16,5 +16,5 @@ export const handleResponse = (response: AxiosResponse) => {
   }
 
   extractResponseTokens(headers as Headers)
-  return data
+  return data as T
 }
