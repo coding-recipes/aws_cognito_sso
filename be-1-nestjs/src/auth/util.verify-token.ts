@@ -1,6 +1,4 @@
-/**
- * https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.ts
- */
+// https://github.com/awslabs/aws-support-tools/blob/master/Cognito/decode-verify-jwt/decode-verify-jwt.ts
 
 import { promisify } from 'util';
 import * as Axios from 'axios';
@@ -8,7 +6,9 @@ import * as jsonwebtoken from 'jsonwebtoken';
 import * as jwkToPem from 'jwk-to-pem';
 import { config } from '@/config'
 
-export interface ClaimVerifyResult {
+
+export interface VerifyAccessTokenResult {
+  readonly sub: string;
   readonly userName: string;
   readonly clientId: string;
   readonly isValid: boolean;
@@ -41,12 +41,18 @@ interface MapOfKidToPublicKey {
 }
 
 interface Claim {
-  token_use: string;
-  auth_time: number;
+  sub: string;
   iss: string;
-  exp: number;
-  username: string;
+  version: number;
   client_id: string;
+  origin_jti: string;
+  token_use: string;
+  scope: string;
+  auth_time: number;
+  exp: number;
+  iat: number;
+  jti: string;
+  username: string;
 }
 
 const cognitoIssuer = () => {
@@ -59,6 +65,7 @@ let cacheKeys: MapOfKidToPublicKey | undefined;
 const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
   if (!cacheKeys) {
     const url = `${cognitoIssuer()}/.well-known/jwks.json`;
+    console.log('...COGNITO --> getPublicKeys')
     const publicKeys = await Axios.default.get<PublicKeys>(url);
     cacheKeys = publicKeys.data.keys.reduce((agg, current) => {
       const pem = jwkToPem(current);
@@ -73,17 +80,16 @@ const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
 
 const verifyPromised = promisify(jsonwebtoken.verify.bind(jsonwebtoken));
 
-const handler = async (token: string): Promise<ClaimVerifyResult> => {
-  let result: ClaimVerifyResult;
+export const verifyAccessToken = async (token: string): Promise<VerifyAccessTokenResult> => {
+  let result: VerifyAccessTokenResult
   try {
-    console.log(`user claim verify invoked for ${token.substring(0, 8)}...`);
+    console.log(`...checking ${token.substring(0, 8)}...`);
     const tokenSections = (token || '').split('.');
     if (tokenSections.length < 2) {
       throw new Error('requested token is invalid');
     }
     const headerJSON = Buffer.from(tokenSections[0], 'base64').toString('utf8');
     const header = JSON.parse(headerJSON) as TokenHeader;
-    console.log('header', header)
     const keys = await getPublicKeys();
     const key = keys[header.kid];
     if (key === undefined) {
@@ -100,12 +106,10 @@ const handler = async (token: string): Promise<ClaimVerifyResult> => {
     if (claim.token_use !== 'access') {
       throw new Error('claim use is not access');
     }
-    console.log(`claim confirmed for ${claim.username}`);
-    result = { userName: claim.username, clientId: claim.client_id, isValid: true };
+    console.log(`...confirmed ${claim.username}`);
+    result = { userName: claim.username, sub: claim.sub, clientId: claim.client_id, isValid: true };
   } catch (error) {
-    result = { userName: '', clientId: '', error, isValid: false };
+    result = { userName: '', sub: '', clientId: '', error, isValid: false };
   }
   return result;
 };
-
-export { handler as verifyToken };

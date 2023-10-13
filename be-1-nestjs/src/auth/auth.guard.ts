@@ -1,34 +1,27 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { verifyToken, ClaimVerifyResult } from './util.verify-token';
-
-const validateAccessToken = async (request: any): Promise<boolean> => {
-  const token = request.headers?.authorization?.split(' ')[1];
-  const accessToken = request.headers?.['x-access-token']
-  const refreshToken = request.headers?.['x-refresh-token']
-
-  // console.log({ token, accessToken, refreshToken })
-  console.log(token)
-
-  if (!token) {
-    return false;
-  } else {
-    const res = await verifyToken(token)
-    console.log("ACCESS token validity ----> ", res.isValid, res.error?.message)
-
-    return res.isValid
-  }
-}
-
+import { Request, Response } from 'express';
+import { ValidateAccessTokenResult, validateAccessToken } from './util.validate-token';
+import { UserIdentity, UserRequest } from './auth.types';
 @Injectable()
 export class AuthGuard implements CanActivate {
-
-  canActivate(
+  async canActivate(
     context: ExecutionContext,
-  ): boolean | Promise<boolean> | Observable<boolean> {
-    const request = context.switchToHttp().getRequest();
-    const response = context.switchToHttp().getResponse();
-    response.setHeader('X-Access-Token-New', 'new-token');
-    return validateAccessToken(request);
+  ): Promise<boolean> {
+    const request: UserRequest = context.switchToHttp().getRequest();
+    const response: Response = context.switchToHttp().getResponse();
+
+    console.log('-------- GUARD --------')
+    const res: ValidateAccessTokenResult = await validateAccessToken(request);
+    if (res.isValid) {
+      request.identity = res.identity;
+      if (res.newAccessToken) {
+        response.setHeader('x-access-token', res.newAccessToken);
+      }
+      return true;
+    } else {
+      console.log("ERROR AuthGuard ---> ", res.error)
+      return false;
+    }
+
   }
 }

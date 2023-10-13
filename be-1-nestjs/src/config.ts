@@ -11,11 +11,8 @@ export const config = () => ({
     dropSchema: false,
     logging: false,
     entities: ['dist/entity/*.js', 'dist/entities/*.js', 'dist/**/*.entity.js'],
-    // entities: ['dist/entities/*.js'],
-    // migrations: ['dist/migration/**/*.js'],
-    // subscribers: ['dist/subscriber/**/*.js']
-    // migrations: ["migration/*.js"],
     migrations: ["dist/migration/*.js"],
+    // subscribers: ['dist/subscriber/**/*.js']
     // cli: { migrationsDir: "migration" }
   },
   swagger: {
