@@ -2,7 +2,7 @@ import { handleResponse } from "./util.response";
 import { handleRequest } from "./util.request";
 import { RequestProps, GeneralRequestProps } from "./types";
 
-export const apiRequest = async <T>({ method, route, params = {}, headers = {} }: GeneralRequestProps) => {
+const apiRequest = async <T>({ method, route, params = {}, headers = {} }: GeneralRequestProps) => {
   const response = await handleRequest<T>({ method, route, headers, params })
   return handleResponse(response)
 };
