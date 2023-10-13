@@ -80,6 +80,7 @@ const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
 
 const verifyPromised = promisify(jsonwebtoken.verify.bind(jsonwebtoken));
 
+
 export const verifyAccessToken = async (token: string): Promise<VerifyAccessTokenResult> => {
   let result: VerifyAccessTokenResult
   try {

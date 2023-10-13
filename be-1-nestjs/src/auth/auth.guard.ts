@@ -1,22 +1,23 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Request, Response } from 'express';
-import { ValidateAccessTokenResult, validateAccessToken } from './util.validate-token';
-import { UserIdentity, UserRequest } from './auth.types';
+import { handleTokens, HandleTokensResult } from './util.handle-tokens';
+import { getRequestTokens, setResponseTokens, SetResponseTokensProps } from './util.api-tokens';
+import { setIdentity } from './util.identity';
+
 @Injectable()
 export class AuthGuard implements CanActivate {
   async canActivate(
     context: ExecutionContext,
   ): Promise<boolean> {
-    const request: UserRequest = context.switchToHttp().getRequest();
+    const request: Request = context.switchToHttp().getRequest();
     const response: Response = context.switchToHttp().getResponse();
+    const requestTokens = getRequestTokens(request);
 
     console.log('-------- GUARD --------')
-    const res: ValidateAccessTokenResult = await validateAccessToken(request);
+    const res: HandleTokensResult = await handleTokens(requestTokens);
     if (res.isValid) {
-      request.identity = res.identity;
-      if (res.newAccessToken) {
-        response.setHeader('x-access-token', res.newAccessToken);
-      }
+      setIdentity(request, res.identity!)
+      setResponseTokens(response, res as SetResponseTokensProps)
       return true;
     } else {
       console.log("ERROR AuthGuard ---> ", res.error)

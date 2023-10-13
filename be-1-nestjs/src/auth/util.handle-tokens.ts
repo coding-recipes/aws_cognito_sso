@@ -1,33 +1,22 @@
 import { verifyAccessToken, VerifyAccessTokenResult } from './util.verify-token';
 import { refreshAccessToken, RefreshAccessTokenResult } from './util.refresh-token'
 import { UserIdentity } from './auth.types';
-import { Request } from 'express';
+import { createIdentity } from './util.identity';
 
-export interface ValidateAccessTokenResult {
+export interface HandleTokensResult {
   readonly isValid: boolean;
   readonly error?: any;
   readonly identity?: UserIdentity
-  readonly newAccessToken?: string
+  readonly accessToken?: string
 }
 
-const createIdentity = (claim: VerifyAccessTokenResult): UserIdentity => {
-  return {
-    sub: claim.sub,
-    userName: claim.userName,
-    clientId: claim.clientId
-  }
+interface HandleTokensProps {
+  accessToken: string;
+  refreshToken: string;
 }
 
-export const validateAccessToken = async (request: Request): Promise<ValidateAccessTokenResult> => {
+export const handleTokens = async ({ accessToken, refreshToken }: HandleTokensProps): Promise<HandleTokensResult> => {
   try {
-
-    const accessToken0 = request.headers.authorization?.split(' ')[1];
-    const accessToken1 = request.headers['x-access-token'][0]
-    const refreshToken1 = request.headers['x-refresh-token'][0]
-
-    const accessToken = accessToken0 || accessToken1
-    const refreshToken = refreshToken1
-
     if (!accessToken) {
       throw new Error('No access token')
     }
@@ -38,13 +27,13 @@ export const validateAccessToken = async (request: Request): Promise<ValidateAcc
     }
 
     if (refreshToken) {
-      const refreshRes: RefreshAccessTokenResult = await refreshAccessToken(refreshToken1)
+      const refreshRes: RefreshAccessTokenResult = await refreshAccessToken(refreshToken)
       const newAccessToken = refreshRes.access_token;
       const verifResNew: VerifyAccessTokenResult = await verifyAccessToken(newAccessToken)
 
       if (newAccessToken) {
         console.log('...new access token', newAccessToken.substring(0, 8))
-        return { isValid: true, identity: createIdentity(verifResNew), newAccessToken }
+        return { isValid: true, identity: createIdentity(verifResNew), accessToken: newAccessToken }
       } else {
         throw new Error('No new access token')
       }
