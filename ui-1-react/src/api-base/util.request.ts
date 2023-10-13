@@ -13,3 +13,8 @@ export const handleRequest = async <T>({ method, route, params = {}, headers = {
   headers = addRequestTokens(headers)
   return axios.request<T>({ method, url, headers, params, validateStatus: _ => true })
 };
+
+export const handleRequestUnAuth = async <T>({ method, route, params = {}, headers = {} }: GeneralRequestProps): Promise<AxiosResponse<T>> => {
+  const url = getUrl(route)
+  return axios.request<T>({ method, url, headers, params, validateStatus: _ => true })
+};

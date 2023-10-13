@@ -1,5 +1,5 @@
-import { getSSOauthUrl, signInUrlTemplate, signInRedirectUrl, signOutRedirectUrl, signOutUrlTemplate } from "./util.urls";
-import { setCBPage } from "./util.app";
+import { getSSOauthUrl, signInUrlTemplate, signOutUrlTemplate } from "./util.urls";
+import { setCBPage, signInRedirectUrl, signOutRedirectUrl, } from "./util.app";
 
 export const redirectToSsoAuth = (callbackPage: string = "") => {
   setCBPage(callbackPage)

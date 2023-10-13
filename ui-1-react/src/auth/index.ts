@@ -1,6 +1,6 @@
-export { ProtectedRoute } from './ProtectedRoute';
-export { SignInHandler } from './SignInHandler'
-export { SignOutHandler } from './SignOutHandler'
-export { AuthGlobalListener } from './AuthGlobalListener'
+export { AuthGlobalListener } from './components/AuthGlobalListener'
+export { ProtectedRoute } from './components/ProtectedRoute';
+export { SignInHandler } from './components/SignInHandler'
+export { SignOutHandler } from './components/SignOutHandler'
 export { signOut } from './auth.reqs'
 export * from './auth.store'
