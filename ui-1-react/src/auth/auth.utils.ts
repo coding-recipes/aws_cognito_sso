@@ -3,14 +3,15 @@ import { config } from "../config";
 
 const CONFIG = config();
 
-export const getRedirectUrl = () => {
-  return window.location.origin + "/" + CONFIG.sso_signin_redirect_route;
-}
+export const signInRedirectUrl = () => window.location.origin + "/" + CONFIG.sso_signin_redirect_route;
+const signOutRedirectUrl = () => window.location.origin + "/" + CONFIG.sso_signout_redirect_route;
 
-export const getSSOauthUrl = () => {
-  const redirectUri = getRedirectUrl();
+const signInUrlTemplate = () => CONFIG.sso_signin_url_template
+const ignOutUrlTemplate = () => CONFIG.sso_sigout_url_template
+
+const getSSOauthUrl = (urlTemplate: string, redirectUri: string) => {
   const redirectUriEncoded = encodeURIComponent(redirectUri);
-  const authUrl = CONFIG.sso_auth_url_template
+  const authUrl = urlTemplate
     .replace('{domain}', CONFIG.cognito_domain_name)
     .replace('{region}', CONFIG.cognito_region)
     .replace('{response_type}', CONFIG.cognito_auth_response_type)
@@ -27,6 +28,9 @@ export const getApiCodeExchangeUrl = () => {
 }
 
 export const setCBPage = (callbackPage: string) => {
+  if (!callbackPage || ['/signin', '/signout'].includes(callbackPage)) {
+    callbackPage = "/"
+  }
   LocalStore.set(CONFIG.store_callbackPage, callbackPage);
 }
 
@@ -34,8 +38,14 @@ export const getCBPage = () => {
   return LocalStore.get(CONFIG.store_callbackPage) || "";
 }
 
-export const redirectToSSO = (callbackPage: string = "") => {
+export const redirectToSsoAuth = (callbackPage: string = "") => {
   setCBPage(callbackPage)
-  const authUrl = getSSOauthUrl();
+  const authUrl = getSSOauthUrl(signInUrlTemplate(), signInRedirectUrl());
+  window.location.href = authUrl
+}
+
+export const redirectToSsLogout = (callbackPage: string = "") => {
+  setCBPage(callbackPage)
+  const authUrl = getSSOauthUrl(ignOutUrlTemplate(), signOutRedirectUrl());
   window.location.href = authUrl
 }

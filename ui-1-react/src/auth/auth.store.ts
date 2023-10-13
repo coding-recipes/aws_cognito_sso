@@ -17,9 +17,9 @@ export const clearTokens = () => {
 export const updateTokens = (newTokens: Partial<Tokens>) => {
   const oldTokens = getStoreState().tokens
   const tokens: Tokens = {
-    accessToken: newTokens.accessToken || oldTokens.accessToken || "",
-    refreshToken: newTokens.refreshToken || oldTokens.refreshToken || "",
-    idToken: newTokens.idToken || oldTokens.idToken || "",
+    accessToken: newTokens.accessToken || oldTokens?.accessToken || "",
+    refreshToken: newTokens.refreshToken || oldTokens?.refreshToken || "",
+    idToken: newTokens.idToken || oldTokens?.idToken || "",
   }
   setTokens(tokens)
 }

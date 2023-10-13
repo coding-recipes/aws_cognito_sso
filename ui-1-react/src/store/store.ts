@@ -4,10 +4,10 @@ import { Tokens } from '../auth';
 
 export interface StoreState {
   user: User | undefined;
-  tokens: Partial<Tokens>;
+  tokens: Tokens | undefined;
 }
 
 export const useStore = create<StoreState>(() => ({
   user: undefined,
-  tokens: {},
+  tokens: undefined,
 }));
