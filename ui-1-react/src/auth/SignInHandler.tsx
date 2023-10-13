@@ -5,7 +5,7 @@ import { reqGetTokens } from "./auth.reqs";
 import { setTokens } from "./auth.store";
 
 export type AuthStatus = 'init' | 'authCode' | 'success' | 'error'
-let requestSent: boolean = false
+let requestSent: boolean = false // to prevent React DevTools from calling this twice
 
 export const SignInHandler = ({ onLoading, onFailed }: { onLoading: React.ReactNode, onFailed: React.ReactNode }) => {
   const [searchParams] = useSearchParams();
@@ -28,7 +28,6 @@ export const SignInHandler = ({ onLoading, onFailed }: { onLoading: React.ReactN
 
   useEffect(() => {
     doThings()
-    return () => { requestSent = false }
   }, [])
 
   if (status === 'error') {

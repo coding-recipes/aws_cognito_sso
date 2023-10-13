@@ -1,5 +1,5 @@
 import { getRequest } from "./api";
-import { Stat } from "./dto";
+import { Stat } from "./entity";
 
 export const getStats = async () => {
   return getRequest<Stat[]>({ route: '/stats' })

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { config } from "../config";
-import { getTokens } from "../auth";
+import { getTokens, updateTokens, clearTokens } from "../auth";
 
 const getUrl = (route: string) => {
   return config().api_url + route;
@@ -26,11 +26,20 @@ export const apiRequest = async <T>({ method, route, params = {}, headers = {} }
   }
 
   const response = await axios.request<T>({ method, url, headers, params })
-  const responseHeaders = response.headers
-  console.log('responseHeaders', responseHeaders)
-  console.log('NOT IMPLEMENTED: change tokens in store based on responseHeaders')
 
-  return response.data
+  if (response.status === 403) {
+    clearTokens()
+  } else {
+    if (response.status > 299) {
+      console.log("ERROR: ", response.statusText)
+    }
+    const responseHeaders = response.headers
+    const newAccessToken = responseHeaders['x-access-token']
+    const newRefreshToken = responseHeaders['x-refresh-token']
+    updateTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken })
+    return response.data
+  }
+
 };
 
 export const getRequest = async <T>({ route, params = {}, headers = {} }: RequestProps) => {

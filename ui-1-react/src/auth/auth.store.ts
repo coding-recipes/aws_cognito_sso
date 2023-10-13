@@ -9,11 +9,19 @@ export interface Tokens {
 export const setTokens = (tokens?: Tokens) => {
   setStoreState({ tokens })
 }
-export const setToken = (newTokens: Tokens) => {
-  const defaultTokens = { access_token: "", refresh_token: "", id_token: "" }
+
+export const clearTokens = () => {
+  setTokens()
+}
+
+export const updateTokens = (newTokens: Partial<Tokens>) => {
   const oldTokens = getStoreState().tokens
-  const tokens = { ...defaultTokens, ...oldTokens, ...newTokens }
-  setStoreState({ tokens })
+  const tokens: Tokens = {
+    accessToken: newTokens.accessToken || oldTokens.accessToken || "",
+    refreshToken: newTokens.refreshToken || oldTokens.refreshToken || "",
+    idToken: newTokens.idToken || oldTokens.idToken || "",
+  }
+  setTokens(tokens)
 }
 
 export const getTokens = () => {
