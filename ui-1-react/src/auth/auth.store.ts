@@ -16,4 +16,8 @@ export const setToken = (newTokens: Tokens) => {
   setStoreState({ tokens })
 }
 
+export const getTokens = () => {
+  return getStoreState().tokens
+}
+
 export const tokensSelector = createSelector<Tokens>((state) => state.tokens)
