@@ -1,7 +1,7 @@
 
 const {
   VITE_COGNITO_REGION,
-  VITE_COGNITO_DOMAIN_NAME,
+  VITE_COGNITO_CLIENT_DOMAIN,
   VITE_COGNITO_CLIENT_ID,
   VITE_SSO_SIGNIN_REDIRECT_ROUTE,
   // VITE_SSO_SIGNOUT_REDIRECT_ROUTE,
@@ -10,7 +10,7 @@ const {
 
 export const config = () => ({
   cognito_region: VITE_COGNITO_REGION,
-  cognito_domain_name: VITE_COGNITO_DOMAIN_NAME,
+  cognito_domain_name: VITE_COGNITO_CLIENT_DOMAIN,
   cognito_client_id: VITE_COGNITO_CLIENT_ID,
   cognito_auth_response_type: "code",
   sso_signin_redirect_route: VITE_SSO_SIGNIN_REDIRECT_ROUTE,
