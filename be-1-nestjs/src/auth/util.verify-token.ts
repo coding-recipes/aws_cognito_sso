@@ -107,7 +107,9 @@ export const verifyAccessToken = async (token: string): Promise<VerifyAccessToke
     if (claim.token_use !== 'access') {
       throw new Error('claim use is not access');
     }
-    console.log(`...confirmed - ${claim.username} - ${claim.sub}`);
+
+    const expSec = Math.trunc((new Date(claim.exp * 1000).getTime() - Date.now()) / 1000)
+    console.log(`...confirmed - ${claim.username} - ${claim.sub} - ${expSec}sec`);
     result = { userName: claim.username, sub: claim.sub, clientId: claim.client_id, isValid: true };
   } catch (error) {
     result = { userName: '', sub: '', clientId: '', error, isValid: false };
