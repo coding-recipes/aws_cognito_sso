@@ -29,10 +29,11 @@ export const config = () => ({
     contact: { name: "Author", url: "", email: "" }
   },
   cognito: {
-    endpoint: process.env.COGNITO_ENDPOINT,
-    tokenRoute: process.env.COGNITO_TOKEN_ROUTE,
+    poolId: process.env.COGNITO_POOL_ID,
     clientId: process.env.COGNITO_CLIENT_ID,
-    clientSecret: process.env.COGNITO_CLIENT_SECRET
+    clientSecret: process.env.COGNITO_CLIENT_SECRET,
+    clientDomain: process.env.COGNITO_CLIENT_DOMAIN,
+    clientRegion: process.env.COGNITO_CLIENT_REGION,
   }
 })
 
