@@ -1,14 +1,12 @@
 from flask import Flask
+from app.auth import auth_guard, UserIdentity
 
 
 def user_routes(app: Flask):
     @app.route("/user")
-    def get_user():
+    @auth_guard
+    def get_user_req(user: UserIdentity):
         return {
-            "identity": {
-                "sub": "1234567890",
-                "userName": "John Doe",
-                "clientID": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-            },
+            "identity": user,
             "data": {},
         }
