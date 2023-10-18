@@ -1,5 +1,3 @@
-__all__ = ["verify_access_token", "VerifyAccessTokenResult"]
-
 import requests
 import jwt
 import base64
@@ -8,7 +6,8 @@ import time
 from typing import TypedDict
 from jose import jwk, jwt
 from jose.utils import base64url_decode
-from app.config import COGNITO_CLIENT_REGION, COGNITO_POOL_ID
+
+from .util_get_jwk import cognito_issuer, cognito_keys, JsonWebKey, JWKS
 
 
 class VerifyAccessTokenResult(TypedDict):
@@ -22,18 +21,6 @@ class VerifyAccessTokenResult(TypedDict):
 class TokenHeader(TypedDict):
     kid: str
     alg: str
-
-
-class JsonWebKey(TypedDict):
-    alg: str
-    e: str
-    kid: str
-    kty: str
-    n: str
-    use: str
-
-
-JWKS = list[JsonWebKey]
 
 
 class Claim(TypedDict):
@@ -51,23 +38,6 @@ class Claim(TypedDict):
     username: str
 
 
-def cognito_issuer():
-    return f"https://cognito-idp.{COGNITO_CLIENT_REGION}.amazonaws.com/{COGNITO_POOL_ID}"
-
-
-cached_keys: JWKS = None
-
-
-def get_keys() -> JWKS:
-    global cached_keys
-    if not cached_keys:
-        url = f"{cognito_issuer()}/.well-known/jwks.json"
-        print("...COGNITO --> getPublicKeys")
-        response = requests.get(url)
-        cached_keys = response.json()["keys"]
-    return cached_keys
-
-
 def verify_access_token(token) -> VerifyAccessTokenResult:
     try:
         print(f"...checking {token[:8]}...")
@@ -79,7 +49,7 @@ def verify_access_token(token) -> VerifyAccessTokenResult:
         header: TokenHeader = json.loads(header_json)
         kid: str = header["kid"]
 
-        keys: JWKS = get_keys()
+        keys: JWKS = cognito_keys()
         key_index = -1
         for i in range(len(keys)):
             if kid == keys[i]["kid"]:
@@ -104,7 +74,7 @@ def verify_access_token(token) -> VerifyAccessTokenResult:
         if claim["token_use"] != "access":
             raise Exception("claim use is not access")
 
-        exp_sec = int((claim["exp"] * 1000 - time.time()) / 1000)
+        exp_sec = int(claim["exp"] - time.time())
         print(f"...confirmed - {claim['username']} - {claim['sub']} - {exp_sec}sec")
 
         return {"user_name": claim["username"], "sub": claim["sub"], "client_id": claim["client_id"], "is_valid": True}
