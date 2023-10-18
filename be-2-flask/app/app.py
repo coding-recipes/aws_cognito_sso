@@ -1,8 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
-from app.user.controller import user_routes
-from app.stats.controller import stats_routes
-from app.auth.controller import auth_routes
+from app.user import user_routes
+from app.stats import stats_routes
+from app.auth import auth_routes
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")

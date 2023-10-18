@@ -1,5 +1,6 @@
-import requests
+__all__ = ["verify_access_token", "VerifyAccessTokenResult"]
 
+import requests
 import jwt
 import base64
 import json
@@ -12,9 +13,9 @@ from app.config import COGNITO_CLIENT_REGION, COGNITO_POOL_ID
 
 class VerifyAccessTokenResult(TypedDict):
     sub: str
-    userName: str
-    clientId: str
-    isValid: bool
+    user_name: str
+    client_id: str
+    is_valid: bool
     error: str
 
 
@@ -23,7 +24,7 @@ class TokenHeader(TypedDict):
     alg: str
 
 
-class JWK(TypedDict):
+class JsonWebKey(TypedDict):
     alg: str
     e: str
     kid: str
@@ -32,7 +33,7 @@ class JWK(TypedDict):
     use: str
 
 
-JWKS = list[JWK]
+JWKS = list[JsonWebKey]
 
 
 class Claim(TypedDict):
@@ -84,7 +85,7 @@ def verify_access_token(token) -> VerifyAccessTokenResult:
             if kid == keys[i]["kid"]:
                 key_index = i
                 break
-        key: JWK = keys[key_index]
+        key: JsonWebKey = keys[key_index]
         public_key = jwk.construct(key)
         message, encoded_signature = str(token).rsplit(".", 1)
         # decode the signature
@@ -106,6 +107,6 @@ def verify_access_token(token) -> VerifyAccessTokenResult:
         exp_sec = int((claim["exp"] * 1000 - time.time()) / 1000)
         print(f"...confirmed - {claim['username']} - {claim['sub']} - {exp_sec}sec")
 
-        return {"userName": claim["username"], "sub": claim["sub"], "clientId": claim["client_id"], "isValid": True}
+        return {"user_name": claim["username"], "sub": claim["sub"], "client_id": claim["client_id"], "is_valid": True}
     except Exception as error:
-        return {"userName": "", "sub": "", "clientId": "", "error": str(error), "isValid": False}
+        return {"user_name": "", "sub": "", "client_id": "", "error": str(error), "is_valid": False}
