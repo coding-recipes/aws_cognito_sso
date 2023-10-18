@@ -10,10 +10,6 @@ export interface RefreshAccessTokenResult {
   expires_in: number
 }
 
-export interface RefreshTokenProps {
-  refreshToken: string
-}
-
 export const refreshAccessToken = async (refresh_token: string): Promise<RefreshAccessTokenResult> => {
   const { clientId, clientSecret, clientDomain, clientRegion } = config().cognito
 
