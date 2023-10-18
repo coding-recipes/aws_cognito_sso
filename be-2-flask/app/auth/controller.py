@@ -14,8 +14,6 @@ def auth_routes(app: Flask):
         if request.method == "POST":
             getTokensDto = request.json
 
-        print(getTokensDto)
-
         try:
             return await get_tokens(getTokensDto)
         except Exception as e:
