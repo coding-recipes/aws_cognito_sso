@@ -13,8 +13,8 @@ class HandleTokensResult(TypedDict):
 
 def create_identity(verify_result: VerifyAccessTokenResult) -> UserIdentity:
     return {
-        "sub": verify_result["sub"],
-        "username": verify_result["user_name"],
+        "user_id": verify_result["sub"],
+        "user_name": verify_result["user_name"],
         "client_id": verify_result["client_id"],
     }
 

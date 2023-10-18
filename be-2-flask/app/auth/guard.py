@@ -1,5 +1,5 @@
 from functools import wraps
-from flask import request, make_response, Response
+from flask import make_response, Response
 from .util_api_tokens import get_request_tokes, set_response_tokens
 from .util_handle_tokens import handle_tokens, HandleTokensResult
 from .types import UserIdentity

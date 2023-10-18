@@ -13,6 +13,6 @@ class Tokens(TypedDict):
 
 
 class UserIdentity(TypedDict):
-    sub: str
-    userName: str
-    clientId: str
+    user_id: str
+    user_name: str
+    client_id: str
