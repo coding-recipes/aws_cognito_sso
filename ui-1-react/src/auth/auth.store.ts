@@ -17,10 +17,10 @@ export interface AuthStoreState {
   initTokens: () => void;
 }
 
-export const lsWriteTokens = (tokens: Tokens) => {
+const lsWriteTokens = (tokens: Tokens) => {
   LocalStore.set('authTokens', JSON.stringify(tokens))
 }
-export const lsReadTokens = (): Tokens => {
+const lsReadTokens = (): Tokens => {
   const tokens = LocalStore.get('authTokens')
   try {
     return JSON.parse(tokens || '{}') as Tokens
@@ -28,7 +28,7 @@ export const lsReadTokens = (): Tokens => {
     return {}
   }
 }
-export const lsClearTokens = () => {
+const lsClearTokens = () => {
   LocalStore.remove('authTokens')
 }
 
