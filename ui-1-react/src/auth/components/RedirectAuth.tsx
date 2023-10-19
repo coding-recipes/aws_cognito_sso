@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { FullLoader } from "../../atoms";
+import { FullLoader } from "../../components/atoms";
 import { redirectToSsoAuth } from "../util.sso";
 
 export const RedirectAuthDeferred = ({ callbackPage = "", timeoutSec = 1 }: { callbackPage?: string, timeoutSec?: number }) => {

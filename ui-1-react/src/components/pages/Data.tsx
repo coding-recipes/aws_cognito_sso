@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from "react-query";
-import { getStats } from "../api-resources";
+import { getStats } from "../../api-resources";
 import { Button } from "@chakra-ui/react";
 
 export default function Page() {

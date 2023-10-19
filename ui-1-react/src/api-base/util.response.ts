@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { signOut } from "../auth";
+import { authSignOut } from "../auth";
 import { extractResponseTokens } from "./util.tokens";
 import { Headers } from "./types";
 
@@ -11,7 +11,7 @@ export const handleResponse = <T>(response: AxiosResponse) => {
   }
 
   if (status === 401) {
-    signOut();
+    authSignOut();
     throw new Error("Unauthorized")
   }
 

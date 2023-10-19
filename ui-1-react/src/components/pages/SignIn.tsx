@@ -1,4 +1,4 @@
-import { SignInHandler } from '../auth';
+import { SignInHandler } from '../../auth';
 import { FullLoader } from '../atoms';
 
 export default function Page() {

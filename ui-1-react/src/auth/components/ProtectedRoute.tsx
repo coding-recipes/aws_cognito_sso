@@ -1,6 +1,6 @@
 import React from "react";
 import { RedirectAuthDeferred } from "./RedirectAuth";
-import { tokensSelector } from "..";
+import { tokensSelector } from "../auth.store";
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const tokens = tokensSelector();

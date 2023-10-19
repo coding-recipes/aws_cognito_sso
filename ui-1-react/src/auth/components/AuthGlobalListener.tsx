@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { initTokens } from "..";
+import { initTokens } from "../auth.store";
 
 export const AuthGlobalListener = () => {
   useEffect(() => {
