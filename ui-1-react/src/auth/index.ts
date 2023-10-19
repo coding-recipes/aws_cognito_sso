@@ -1,2 +1,2 @@
 export { AuthGlobalListener, SignInHandler, SignOutHandler, ProtectedRoute } from './components'
-export { authGetTokens, authPatchTokens, authSignIn, authSignOut } from './auth.reqs'
+export { authGetTokens, authSetTokens, authSignIn, authSignOut } from './actions'

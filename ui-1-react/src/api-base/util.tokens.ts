@@ -1,4 +1,4 @@
-import { authGetTokens, authPatchTokens } from "../auth";
+import { authGetTokens, authSetTokens } from "../auth";
 import { Headers } from "./types";
 
 export const addRequestTokens = (headers: Headers): Headers => {
@@ -18,5 +18,5 @@ export const addRequestTokens = (headers: Headers): Headers => {
 export const extractResponseTokens = (headers: Headers): void => {
   const newAccessToken = headers['x-access-token']
   const newRefreshToken = headers['x-refresh-token']
-  authPatchTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken })
+  authSetTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken })
 }

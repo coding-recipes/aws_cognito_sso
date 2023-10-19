@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
-import { Tokens, setTokens } from "../auth.store";
+import { Tokens, setTokens } from "../store";
 import { getCBPage, signInRedirectUrl } from "../util.app";
 import { getRequestUnAuth } from "../../api-base";
 import { config } from "../../config";
