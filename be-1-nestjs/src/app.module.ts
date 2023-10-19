@@ -8,7 +8,8 @@ import { DatabaseConnectionService } from './db';
 
 import { AuthModule } from './auth';
 import { StatModule } from './stat';
-import { UserModule } from './user/user.module';
+import { UserModule } from './user';
+import { InfoModule } from './info';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { UserModule } from './user/user.module';
     }),
     AuthModule,
     StatModule,
-    UserModule
+    UserModule,
+    InfoModule
   ],
   controllers: [],
   providers: [AppService],
