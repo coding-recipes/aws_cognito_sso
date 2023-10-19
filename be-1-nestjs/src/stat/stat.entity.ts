@@ -30,8 +30,8 @@ export class Stat extends BaseEntity {
   value: number;
 
   @CreateDateColumn({ name: 'created_date', type: 'datetime' })
-  createdDate: string;
+  createdDate: Date;
 
   @UpdateDateColumn({ name: 'modified_date', type: 'datetime' })
-  lastModifiedDate: string;
+  modifiedDate: Date;
 }

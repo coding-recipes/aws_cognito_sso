@@ -7,6 +7,7 @@ import { Stat } from './stat.entity';
 @Module({
   imports: [TypeOrmModule.forFeature([Stat])],
   controllers: [StatController],
-  providers: [StatService]
+  providers: [StatService],
+  exports: [StatService]
 })
 export class StatModule { }

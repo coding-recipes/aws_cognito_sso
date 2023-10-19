@@ -4,7 +4,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { config } from './config'
 
 import { AppService } from './app.service';
-import { DatabaseConnectionService } from './setupTypeorm';
+import { DatabaseConnectionService } from './db';
 
 import { AuthModule } from './auth';
 import { StatModule } from './stat';
@@ -24,4 +24,9 @@ import { UserModule } from './user/user.module';
   controllers: [],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {
+  constructor(private readonly appService: AppService) { }
+  async onModuleInit() {
+    this.appService.initMockData()
+  }
+}

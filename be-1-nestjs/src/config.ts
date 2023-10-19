@@ -6,7 +6,7 @@ export const config = () => ({
   database: {
     name: process.env.DATABASE_NAME || '',
     type: process.env.DATABASE_TYPE || '',
-    database: process.env.DATABASE_DB || '',
+    database: process.env.DATABASE_DB || 'file::memory:',
     synchronize: process.env.DATABASE_SYNC == "true",
     dropSchema: false,
     logging: false,
