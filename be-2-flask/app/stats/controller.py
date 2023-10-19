@@ -1,10 +1,13 @@
 from flask_openapi3 import OpenAPI
-from .data_generator import create_records, StatRecords
 from app.auth import auth_guard, UserIdentity
+from .service import StatService
+
+from .dto import StatRecords
+from flask import Flask
 
 
-def stats_routes(app: OpenAPI):
+def stats_routes(app: Flask):
     @app.get("/stats", responses={200: StatRecords})
     @auth_guard
     def get_stat_req(_: UserIdentity):
-        return create_records()
+        return {"data": StatService.get_stat_records()}
