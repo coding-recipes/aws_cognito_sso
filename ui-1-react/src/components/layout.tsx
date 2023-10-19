@@ -3,7 +3,7 @@
 export const Layout = ({ children }: { children?: React.ReactNode }) => {
   return <>
     <div className='app-layout'>
-      {/* <LayoutHeader /> */}
+      <LayoutHeader />
       <LayoutContent children={children} />
       {/* <LayoutFooter /> */}
     </div>

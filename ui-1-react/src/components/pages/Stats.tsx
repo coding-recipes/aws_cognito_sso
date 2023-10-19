@@ -5,7 +5,7 @@ import { Button } from "@chakra-ui/react";
 export default function Page() {
   return <div className='content-container'>
     <div>
-      Data Page
+      Stats Page
     </div>
 
     <div>

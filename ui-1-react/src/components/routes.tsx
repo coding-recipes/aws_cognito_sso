@@ -1,9 +1,6 @@
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import { Layout } from './layout';
-import Main from './pages/Root';
-import SignIn from './pages/SignIn';
-import SignOut from './pages/SignOut';
-import Data from './pages/Data';
+import { Main, SignIn, SignOut, Stats } from './pages'
 import { ProtectedRoute } from '../auth';
 
 export const AppRoutes = () => {
@@ -18,7 +15,7 @@ export const AppRoutes = () => {
           </ProtectedRoute>
         }>
         <Route path="" element={<Main />} />
-        <Route path="data" element={<Data />} />
+        <Route path="stats" element={<Stats />} />
         <Route path="*" element={<Navigate to="" />} />
       </Route>
     </Routes >
