@@ -1,7 +1,8 @@
 from typing import TypedDict
-from .types import UserIdentity
 from .util_verify_token import verify_access_token, VerifyAccessTokenResult
 from .util_refresh_token import refresh_access_token, RefreshAccessTokenResult
+from .types import UserIdentity
+from .util_verify_token import create_identity
 
 
 class HandleTokensResult(TypedDict):
@@ -9,14 +10,6 @@ class HandleTokensResult(TypedDict):
     error: str | None
     identity: UserIdentity | None
     access_token: str | None
-
-
-def create_identity(verify_result: VerifyAccessTokenResult) -> UserIdentity:
-    return {
-        "user_id": verify_result["sub"],
-        "user_name": verify_result["user_name"],
-        "client_id": verify_result["client_id"],
-    }
 
 
 def handle_tokens(access_token: str | None, refresh_token: str | None) -> HandleTokensResult:
@@ -30,7 +23,7 @@ def handle_tokens(access_token: str | None, refresh_token: str | None) -> Handle
                 "is_valid": True,
                 "error": None,
                 "identity": create_identity(verif_result),
-                "access_token": access_token,
+                "access_token": None,
             }
 
         if refresh_token == None:

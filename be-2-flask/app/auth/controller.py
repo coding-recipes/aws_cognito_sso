@@ -1,21 +1,21 @@
-from flask import Flask, request, make_response
-from .types import Tokens, GetTokensDto
 from .service import get_tokens
+from flask_openapi3 import OpenAPI
+from .types import Tokens, GetTokensDto
 
 
-def auth_routes(app: Flask):
-    @app.route("/auth/get-tokens", methods=["GET", "POST"])
-    async def get_tokens_req():
-        getTokensDto: GetTokensDto = {}
-
-        if request.method == "GET":
-            getTokensDto = {"code": request.args.get("code"), "redirectUri": request.args.get("redirectUri")}
-
-        if request.method == "POST":
-            getTokensDto = request.json
-
+def auth_routes(app: OpenAPI):
+    @app.get("/auth/get-tokens", responses={200: Tokens})
+    async def req_auth_tokens_get(query: GetTokensDto):
         try:
-            return await get_tokens(getTokensDto)
+            return await get_tokens(query.dict())
         except Exception as e:
             print("...Error:", e)
-            return make_response({"error": "cognito/token error"}, 400)
+            return {"error": "cognito/token error"}, 400
+
+    @app.post("/auth/get-tokens", responses={200: Tokens})
+    async def req_auth_tokens_post(body: GetTokensDto):
+        try:
+            return await get_tokens(body.dict())
+        except Exception as e:
+            print("...Error:", e)
+            return {"error": "cognito/token error"}, 400

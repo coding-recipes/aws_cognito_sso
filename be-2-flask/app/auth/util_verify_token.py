@@ -1,4 +1,3 @@
-import requests
 import jwt
 import base64
 import json
@@ -8,6 +7,7 @@ from jose import jwk, jwt
 from jose.utils import base64url_decode
 
 from .util_get_jwk import cognito_issuer, cognito_keys, JsonWebKey, JWKS
+from .types import UserIdentity
 
 
 class VerifyAccessTokenResult(TypedDict):
@@ -36,6 +36,14 @@ class Claim(TypedDict):
     iat: str
     jti: str
     username: str
+
+
+def create_identity(verify_result: VerifyAccessTokenResult) -> UserIdentity:
+    return {
+        "user_id": verify_result["sub"],
+        "user_name": verify_result["user_name"],
+        "client_id": verify_result["client_id"],
+    }
 
 
 def verify_access_token(token) -> VerifyAccessTokenResult:
