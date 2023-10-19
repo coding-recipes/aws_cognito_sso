@@ -1,4 +1,4 @@
-import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
+import { Injectable, CanActivate, ExecutionContext, HttpException, HttpStatus } from '@nestjs/common';
 import { Request, Response } from 'express';
 import { handleTokens, HandleTokensResult } from './util.handle-tokens';
 import { getRequestTokens, setResponseTokens, SetResponseTokensProps } from './util.api-tokens';
@@ -13,7 +13,6 @@ export class AuthGuard implements CanActivate {
     const response: Response = context.switchToHttp().getResponse();
     const requestTokens = getRequestTokens(request);
 
-    console.log('-------- GUARD --------')
     const res: HandleTokensResult = await handleTokens(requestTokens);
     if (res.isValid) {
       setIdentity(request, res.identity!)
@@ -21,7 +20,7 @@ export class AuthGuard implements CanActivate {
       return true;
     } else {
       console.log("ERROR AuthGuard ---> ", res.error)
-      return false;
+      throw new HttpException(res.error, HttpStatus.UNAUTHORIZED);
     }
 
   }
