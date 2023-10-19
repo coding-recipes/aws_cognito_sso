@@ -5,7 +5,6 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  Unique
 } from 'typeorm';
 
 
