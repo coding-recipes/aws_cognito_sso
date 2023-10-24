@@ -1,14 +1,8 @@
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-} from '@chakra-ui/react'
+import { Menu, MenuButton, MenuList, MenuItem, MenuDivider } from '@chakra-ui/react'
 import { FaRegUser } from 'react-icons/fa'
-import style from './auth.module.css'
 import { Link } from 'react-router-dom'
 import { useAuth } from '../../modules/auth'
+import style from './user.module.css'
 
 export const UserWidget = () => {
   const { signOut } = useAuth()

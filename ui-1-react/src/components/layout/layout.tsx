@@ -1,7 +1,7 @@
 import { Flex } from '@chakra-ui/react'
-import { UserWidget } from '../auth'
-import { Navigation } from './navigation'
 import style from './layout.module.css'
+import { Navigation } from './navigation'
+import { UserWidget } from '../user'
 
 export const Layout = ({ children }: { children?: React.ReactNode }) => {
   return <>

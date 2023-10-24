@@ -14,7 +14,7 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     return <>{children}</>
   } else {
     return <Wait sec={1}>
-      <ProtectedPage />;
+      <ProtectedPage />
     </Wait>
   }
 }
