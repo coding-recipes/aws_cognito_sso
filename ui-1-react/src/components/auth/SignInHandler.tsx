@@ -30,7 +30,6 @@ export const SignInHandlerFrame = ({ onLoading, onFailed }: { onLoading: React.R
       requestTokens(authCode);
       setStatus('success')
     } else {
-      console.log("no auth code")
       setStatus('error')
     }
   }

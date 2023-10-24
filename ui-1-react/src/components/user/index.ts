@@ -1,1 +1,2 @@
-export { UserWidget } from './widget'
+export { UserWidget } from './UserWidget'
+export { UserProfile } from './UserProfile'

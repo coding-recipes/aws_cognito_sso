@@ -1,7 +1,7 @@
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout';
 import { ProtectedRoute, SignInHandler, SignOutHandler } from './components/auth';
-import { HomePage, StatsPage, UserProfilePage } from './pages'
+import { StatsPage, UserPage } from './pages'
 
 export const AppRoutes = () => {
   return <>
@@ -14,10 +14,10 @@ export const AppRoutes = () => {
             <Layout children={<Outlet />} />
           </ProtectedRoute>
         }>
-        <Route path="" element={<HomePage />} />
         <Route path="stats" element={<StatsPage />} />
-        <Route path="user" element={<UserProfilePage />} />
-        <Route path="*" element={<Navigate to="" />} />
+        <Route path="user" element={<UserPage />} />
+        <Route path="" element={<Navigate to="stats" />} />
+        <Route path="*" element={<Navigate to="stats" />} />
       </Route>
     </Routes >
   </>

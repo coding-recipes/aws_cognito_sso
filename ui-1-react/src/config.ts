@@ -1,3 +1,4 @@
+import { DefaultOptions } from "react-query";
 
 const {
   VITE_COGNITO_REGION,
@@ -5,6 +6,14 @@ const {
   VITE_COGNITO_CLIENT_ID,
   VITE_API_URL,
 } = import.meta.env;
+
+export const reactQueryConfig: DefaultOptions = {
+  queries: {
+    cacheTime: 1000 * 60 * 10,
+    staleTime: 1000 * 60 * 10,
+  },
+}
+
 
 export const config = () => ({
   cognito_region: VITE_COGNITO_REGION,

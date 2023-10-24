@@ -4,8 +4,8 @@ import style from './layout.module.css'
 
 export const Navigation = () => {
   return <Stack direction='row' className={style.header_links} gap={8}>
-    <HeaderButton to={"/"} text="Home" />
     <HeaderButton to={"/stats"} text="Stats" />
+    <HeaderButton to={"/user"} text="User" />
   </Stack>
 }
 

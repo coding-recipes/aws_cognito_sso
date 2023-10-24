@@ -12,8 +12,10 @@ export const ProtectedPage = () => {
   return <>
     <Container height={"100%"} maxWidth={"unset"} className={style.protected_page} >
       <Flex direction={"column"} alignItems={"center"} justifyContent={"center"} height={"100%"} gap={4}>
-        <Text fontSize='2xl'>The application is protected!</Text>
-        <Text fontSize='lg'>Please sign up or sign in with your existing user account!</Text>
+        <Text fontSize='3xl'>Cognito Single Sign-On (SSO)</Text>
+        <Text fontSize='2xl'>Demo App - React UI</Text>
+        <Text fontSize='xl' marginTop={10}>The application is protected!</Text>
+        <Text fontSize='lg'>Please use SSO login page to sign in or sign up!</Text>
         <Button
           colorScheme='white'
           variant='outline'
@@ -21,7 +23,7 @@ export const ProtectedPage = () => {
           marginTop={10}
           onClick={onSignIn}
           rightIcon={<MdKeyboardArrowRight />}
-        >Go to sign in page</Button>
+        >Go to SSO login</Button>
       </Flex>
     </Container>
   </>

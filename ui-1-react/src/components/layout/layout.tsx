@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react'
+import { Flex, Container } from '@chakra-ui/react'
 import style from './layout.module.css'
 import { Navigation } from './navigation'
 import { UserWidget } from '../user'
@@ -28,9 +28,9 @@ const LayoutHeader = () => {
 
 const LayoutContent = ({ children }: { children?: React.ReactNode }) => {
   return <>
-    <div className='layout-content'>
+    <Container w={"100%"} maxW={"900px"} padding={10}>
       {children}
-    </div>
+    </Container>
   </>
 }
 

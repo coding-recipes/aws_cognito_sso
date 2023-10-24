@@ -11,8 +11,8 @@ export const Loader = () => {
   />
 }
 
-export const FullLoader = ({ text }: { text?: string }) => {
-  return <Center h={"100%"}>
+export const FullLoader = ({ text, height = "100%" }: { text?: string, height?: string }) => {
+  return <Center h={height}>
     <Flex direction="column" align="center" justify="center" gap={5}>
       <Loader />
       {

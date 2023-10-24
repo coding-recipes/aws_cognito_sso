@@ -8,3 +8,16 @@ export interface Stat {
   createdDate: string;
   lastModifiedDate: string;
 }
+
+export interface Stats {
+  data: Stat[];
+}
+
+export interface CurrentUser {
+  identity: {
+    sub: string;
+    userName: string;
+    clientId: string;
+  };
+  data: any;
+}
