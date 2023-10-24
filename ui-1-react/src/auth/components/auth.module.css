@@ -1,0 +1,14 @@
+.userwidget_menu {
+  color: black
+}
+
+.userwidget_list {
+  color: black;
+  font-size: 0.85rem;
+}
+
+
+.userwidget_button {
+  padding: 10px;
+  color: white;
+}

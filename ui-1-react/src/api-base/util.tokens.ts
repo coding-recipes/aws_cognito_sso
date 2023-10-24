@@ -9,7 +9,7 @@ export const addRequestTokens = (headers: Headers): Headers => {
       ...headers,
       Authorization: `Bearer ${accessToken}`,
       "x-refresh-token": refreshToken,
-      "x-access-token": accessToken,
+      // "x-access-token": accessToken,
     }
   }
   return headers

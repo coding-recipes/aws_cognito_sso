@@ -8,15 +8,6 @@ body {
   user-select: none;
 }
 
-body {
-  color: $text-color;
-  background-color: $background-color;
-  min-height: 100vh;
-  position: relative;
-  float: left;
-}
-
-
 body * {
   box-sizing: border-box;
 }

@@ -1,15 +1,13 @@
 import React from "react";
-import { RedirectAuthDeferred } from "./RedirectAuth";
-import { tokensSelector } from "../store";
+import { useAuth } from "../useAuth";
+import { SignInPage } from "./SignInPage";
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
-  const tokens = tokensSelector();
-  const callbackPage = window.location.pathname;
-  const timeoutSec = 1;
+  const [isLoggedIn] = useAuth();
 
-  if (tokens?.accessToken) {
+  if (isLoggedIn) {
     return <>{children}</>
   } else {
-    return <RedirectAuthDeferred {...{ callbackPage, timeoutSec }} />;
+    return <SignInPage />;
   }
 }
