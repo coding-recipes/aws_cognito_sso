@@ -8,14 +8,11 @@ export const Layout = ({ children }: { children?: React.ReactNode }) => {
     <div className='app-layout'>
       <LayoutHeader />
       <LayoutContent children={children} />
-      {/* <LayoutFooter /> */}
     </div>
   </>
 }
 
-
-
-export const LayoutHeader = () => {
+const LayoutHeader = () => {
   return <>
     <Flex className={style.header} alignItems="center">
       <Flex direction='row' className={style.header_content} >
@@ -27,15 +24,7 @@ export const LayoutHeader = () => {
   </>
 }
 
-export const LayoutFooter = () => {
-  return <>
-    <div className='layout-footer'>
-      <h1>Footer</h1>
-    </div>
-  </>
-}
-
-export const LayoutContent = ({ children }: { children?: React.ReactNode }) => {
+const LayoutContent = ({ children }: { children?: React.ReactNode }) => {
   return <>
     <div className='layout-content'>
       {children}

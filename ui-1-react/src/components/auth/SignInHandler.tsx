@@ -1,13 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../modules/auth/auth.context";
-
+import { FullLoader } from '../atoms';
 
 export type AuthStatus = 'init' | 'authCode' | 'success' | 'error'
 let requestSent: boolean = false // to prevent React DevTools from calling this twice
 
 
-export const SignInHandler = ({ onLoading, onFailed }: { onLoading: React.ReactNode, onFailed: React.ReactNode }) => {
+export const SignInHandler = () => {
+  return <>
+    <SignInHandlerFrame
+      onLoading={<FullLoader text="signing in..." />}
+      onFailed={<FullLoader text="Sing in failed!" />}
+    />
+  </>
+}
+
+
+export const SignInHandlerFrame = ({ onLoading, onFailed }: { onLoading: React.ReactNode, onFailed: React.ReactNode }) => {
   const [searchParams] = useSearchParams();
   const [status, setStatus] = useState<AuthStatus>('init')
   const { requestTokens, getAppCallbackPage } = useAuth()

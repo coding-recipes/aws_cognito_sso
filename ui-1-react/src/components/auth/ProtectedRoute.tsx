@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAuth } from "../../modules/auth/auth.context";
-import { SignInPage } from "./SignInPage";
+import { ProtectedPage } from "./ProtectedPage";
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isLoggedIn, initTokens } = useAuth();
@@ -12,6 +12,6 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   if (isLoggedIn) {
     return <>{children}</>
   } else {
-    return <SignInPage />;
+    return <ProtectedPage />;
   }
 }

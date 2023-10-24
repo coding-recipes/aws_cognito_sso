@@ -6,7 +6,7 @@ import {
 } from '@chakra-ui/react'
 import { useAuth } from '../../modules/auth/auth.context'
 
-export const SignInPage = () => {
+export const ProtectedPage = () => {
   const { signIn } = useAuth()
   return <>
     <Container height={"100%"} >
