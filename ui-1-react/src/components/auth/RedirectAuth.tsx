@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { FullLoader } from "../../components/atoms";
-import { redirectToSSOsignIn } from "../util.sso";
+import { FullLoader } from "../atoms";
+import { useAuth } from "../../modules/auth/auth.context";
 
 export const RedirectAuthDeferred = ({ callbackPage = "", timeoutSec = 1 }: { callbackPage?: string, timeoutSec?: number }) => {
   return <WaitForAuth {...{ timeoutSec, loaderText: "signing in..." }} >
@@ -9,8 +9,9 @@ export const RedirectAuthDeferred = ({ callbackPage = "", timeoutSec = 1 }: { ca
 }
 
 export const RedirectAuth = ({ callbackPage = "" }: { callbackPage?: string }) => {
+  const { signIn } = useAuth()
   useEffect(() => {
-    redirectToSSOsignIn(callbackPage)
+    signIn(callbackPage)
   }, [])
   return <></>
 }

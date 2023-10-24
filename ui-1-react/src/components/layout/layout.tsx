@@ -1,5 +1,5 @@
 import { Flex } from '@chakra-ui/react'
-import { UserWidget } from '../../auth'
+import { UserWidget } from '../auth'
 import { Navigation } from './navigation'
 import style from './layout.module.css'
 

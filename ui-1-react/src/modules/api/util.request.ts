@@ -1,7 +1,6 @@
-import { AxiosResponse } from "axios";
-import { config } from "../config";
+import axios, { AxiosResponse } from "axios";
+import { config } from "../../config";
 import { addRequestTokens } from "./util.tokens";
-import axios from "axios";
 import { GeneralRequestProps } from "./types";
 
 export const getUrl = (route: string) => {

@@ -1,5 +1,7 @@
-import { setCBPage, signInRedirectUrl, signOutRedirectUrl, } from "./util.app";
-import { config } from "../config";
+import { config } from "../../config";
+import { getRequestUnAuth } from "../api";
+import { Tokens } from "./auth.context";
+import { setCBPage } from "./auth.local";
 
 const signInUrlTemplate = () => config().sso_signin_url_template
 const signOutUrlTemplate = () => config().sso_sigout_url_template
@@ -18,6 +20,11 @@ const getSSOauthUrl = (urlTemplate: string, redirectUri: string) => {
   return authUrl;
 }
 
+
+const signInRedirectUrl = () => window.location.origin + config().sso_signin_redirect_route;
+const signOutRedirectUrl = () => window.location.origin + config().sso_signout_redirect_route;
+
+
 export const redirectToSSOsignIn = (callbackPage: string = "") => {
   setCBPage(callbackPage)
   const authUrl = getSSOauthUrl(signInUrlTemplate(), signInRedirectUrl());
@@ -28,4 +35,17 @@ export const redirectToSSOsignOut = (callbackPage: string = "") => {
   setCBPage(callbackPage)
   const authUrl = getSSOauthUrl(signOutUrlTemplate(), signOutRedirectUrl());
   window.location.href = authUrl
+}
+
+export const getTokensReqInputs = (code: string) => {
+  const { api_route_get_token } = config();
+  const route = api_route_get_token
+  const redirectUri = signInRedirectUrl()
+  const params = { code, redirectUri }
+  const headers = {}
+  return { route, params, headers }
+}
+
+export const reqTokens = async (authCode: string) => {
+  getRequestUnAuth<Tokens>(getTokensReqInputs(authCode));
 }

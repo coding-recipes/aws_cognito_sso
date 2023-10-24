@@ -1,4 +1,4 @@
-import { getRequest } from "../api-base";
+import { getRequest } from "../api";
 import { Stat } from "./entities";
 
 export const getStats = async () => {

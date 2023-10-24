@@ -1,4 +1,4 @@
-import { SignOutHandler } from "../../auth"
+import { SignOutHandler } from "../components/auth"
 
 export default function Page() {
   return <SignOutHandler />

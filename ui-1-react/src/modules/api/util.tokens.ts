@@ -1,10 +1,9 @@
-import { authGetTokens, authSetTokens } from "../auth";
+import { getTokens, setTokens } from "../auth/auth.context";
 import { Headers } from "./types";
 
 export const addRequestTokens = (headers: Headers): Headers => {
-  const tokens = authGetTokens()
-  if (tokens) {
-    const { accessToken, refreshToken } = tokens
+  const { accessToken, refreshToken } = getTokens()
+  if (accessToken || refreshToken) {
     headers = {
       ...headers,
       Authorization: `Bearer ${accessToken}`,
@@ -16,7 +15,8 @@ export const addRequestTokens = (headers: Headers): Headers => {
 }
 
 export const extractResponseTokens = (headers: Headers): void => {
-  const newAccessToken = headers['x-access-token']
-  const newRefreshToken = headers['x-refresh-token']
-  authSetTokens({ accessToken: newAccessToken, refreshToken: newRefreshToken })
+  const accessToken = headers['x-access-token']
+  const refreshToken = headers['x-refresh-token']
+  if (accessToken || refreshToken)
+    setTokens({ accessToken, refreshToken })
 }

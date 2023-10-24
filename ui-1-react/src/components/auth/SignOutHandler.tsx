@@ -1,11 +1,12 @@
 import { useEffect } from "react";
-import { redirectToSSOsignIn } from "../util.sso";
+import { useAuth } from "../../modules/auth/auth.context";
 
 export type AuthStatus = 'init' | 'authCode' | 'success' | 'error'
 
 export const SignOutHandler = () => {
+  const { signIn } = useAuth()
   useEffect(() => {
-    redirectToSSOsignIn("/");
+    signIn();
   }, [])
 
   return <></>

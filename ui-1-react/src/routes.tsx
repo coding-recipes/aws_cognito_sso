@@ -1,7 +1,7 @@
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout';
-import { Main, SignIn, SignOut, Stats, UserProfile } from './components/pages'
-import { ProtectedRoute } from './auth';
+import { ProtectedRoute } from './components/auth';
+import { Main, SignIn, SignOut, Stats, UserProfile } from './pages'
 
 export const AppRoutes = () => {
   return <>

@@ -1,5 +1,5 @@
-import { SignInHandler } from '../../auth';
-import { FullLoader } from '../atoms';
+import { FullLoader } from '../components/atoms';
+import { SignInHandler } from '../components/auth';
 
 export default function Page() {
   return <>

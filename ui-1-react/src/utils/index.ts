@@ -1,0 +1,1 @@
+export { LocalStore } from "./localStore";

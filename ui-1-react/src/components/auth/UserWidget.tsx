@@ -3,18 +3,15 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
   MenuDivider,
-  Button,
 } from '@chakra-ui/react'
 import { FaRegUser } from 'react-icons/fa'
 import style from './auth.module.css'
 import { Link } from 'react-router-dom'
-import { authSignOut } from '../actions'
+import { useAuth } from '../../modules/auth/auth.context'
 
 export const UserWidget = () => {
+  const { signOut } = useAuth()
   return (
     <div className={style.userwidget_menu}>
       <Menu >
@@ -24,7 +21,7 @@ export const UserWidget = () => {
         <MenuList className={style.userwidget_list}>
           <MenuItem as={Link} to={"/user"}>Profile</MenuItem>
           <MenuDivider />
-          <MenuItem onClick={authSignOut}>Sign out</MenuItem>
+          <MenuItem onClick={signOut}>Sign out</MenuItem>
         </MenuList>
       </Menu>
     </div>
