@@ -23,7 +23,6 @@ export const ServerInfoComponent = () => {
       <TableContainer>
         <Table size="sm">
           <Tbody>
-            <Tr><Td><b>Identity</b></Td></Tr>
             <Tr><Td>Language</Td><Td>{data.language}</Td></Tr>
             <Tr><Td>Framework</Td><Td>{data.framework}</Td></Tr>
             <Tr><Td>Version</Td><Td>{data.version}</Td></Tr>
