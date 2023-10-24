@@ -1,7 +1,7 @@
 import { Route, Routes, Outlet, Navigate } from 'react-router-dom';
 import { Layout } from './components/layout';
 import { ProtectedRoute, SignInHandler, SignOutHandler } from './components/auth';
-import { StatsPage, UserPage } from './pages'
+import { StatsPage, UserPage, ServerInfoPage } from './pages'
 
 export const AppRoutes = () => {
   return <>
@@ -16,6 +16,7 @@ export const AppRoutes = () => {
         }>
         <Route path="stats" element={<StatsPage />} />
         <Route path="user" element={<UserPage />} />
+        <Route path="server" element={<ServerInfoPage />} />
         <Route path="" element={<Navigate to="stats" />} />
         <Route path="*" element={<Navigate to="stats" />} />
       </Route>

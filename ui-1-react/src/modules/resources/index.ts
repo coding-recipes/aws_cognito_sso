@@ -1,2 +1,2 @@
-export * from './reqs'
+export * from './queries'
 export * from './entities'

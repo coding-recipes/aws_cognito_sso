@@ -21,3 +21,10 @@ export interface CurrentUser {
   };
   data: any;
 }
+
+export interface ServerInfo {
+  swagger: string;
+  framework: string;
+  version: string;
+  language: string;
+}

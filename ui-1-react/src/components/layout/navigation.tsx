@@ -6,6 +6,7 @@ export const Navigation = () => {
   return <Stack direction='row' className={style.header_links} gap={8}>
     <HeaderButton to={"/stats"} text="Stats" />
     <HeaderButton to={"/user"} text="User" />
+    <HeaderButton to={"/server"} text="Server" />
   </Stack>
 }
 
