@@ -40,9 +40,9 @@ class Claim(TypedDict):
 
 def create_identity(verify_result: VerifyAccessTokenResult) -> UserIdentity:
     return {
-        "user_id": verify_result["sub"],
-        "user_name": verify_result["user_name"],
-        "client_id": verify_result["client_id"],
+        "sub": verify_result["sub"],
+        "userName": verify_result["user_name"],
+        "clientId": verify_result["client_id"],
     }
 
 

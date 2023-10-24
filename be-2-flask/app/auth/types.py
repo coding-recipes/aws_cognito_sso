@@ -3,9 +3,9 @@ from typing import TypedDict
 
 
 class UserIdentity(TypedDict):
-    user_id: str
-    user_name: str
-    client_id: str
+    sub: str
+    userName: str
+    clientId: str
 
 
 class GetTokensDto(BaseModel):

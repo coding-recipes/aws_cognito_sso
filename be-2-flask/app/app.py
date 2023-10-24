@@ -6,6 +6,7 @@ from app.db_init import init_database
 from app.user import user_routes
 from app.stats import stats_routes
 from app.auth import auth_routes
+from app.info import info_routes
 
 # app = Flask(__name__)
 # info = Info(title="book API", version="1.0.0")
@@ -17,5 +18,6 @@ CORS(app, expose_headers=["X-Access-Token", "X-Refresh-Token"])
 auth_routes(app)
 user_routes(app)
 stats_routes(app)
+info_routes(app)
 
 init_database()
