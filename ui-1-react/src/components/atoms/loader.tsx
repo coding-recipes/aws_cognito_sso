@@ -1,4 +1,5 @@
 import { Center, Flex, Spinner, Text } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
 
 export const Loader = () => {
   return <Spinner
@@ -19,4 +20,21 @@ export const FullLoader = ({ text }: { text?: string }) => {
       }
     </Flex>
   </Center>
+}
+
+export const Wait = ({ children, sec = 1, text }: { children: React.ReactNode, sec?: number, text?: string }) => {
+  const [toWait, setWait] = useState<boolean>(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => {
+      setWait(false)
+    }, sec * 1000)
+    return () => clearTimeout(t);
+  }, [])
+
+  if (toWait) {
+    return <FullLoader text={text} />
+  } else {
+    return children
+  }
 }

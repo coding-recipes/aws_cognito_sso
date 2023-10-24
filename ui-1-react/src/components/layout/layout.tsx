@@ -16,8 +16,10 @@ const LayoutHeader = () => {
   return <>
     <Flex className={style.header} alignItems="center">
       <Flex direction='row' className={style.header_content} >
-        <h1>Cognito SSO demo - React UI</h1>
-        <Navigation />
+        <Flex direction='row' gap={16}>
+          <h1>Cognito SSO demo - React UI</h1>
+          <Navigation />
+        </Flex>
         <UserWidget />
       </Flex>
     </Flex>

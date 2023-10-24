@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
-import { useAuth } from "../../modules/auth/auth.context";
+import { useAuth } from "../../modules/auth";
+import { Wait } from "../atoms";
 import { ProtectedPage } from "./ProtectedPage";
 
 export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
@@ -12,6 +13,8 @@ export const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   if (isLoggedIn) {
     return <>{children}</>
   } else {
-    return <ProtectedPage />;
+    return <Wait sec={1}>
+      <ProtectedPage />;
+    </Wait>
   }
 }

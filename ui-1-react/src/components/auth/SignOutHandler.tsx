@@ -1,13 +1,11 @@
-import { useEffect } from "react";
-import { useAuth } from "../../modules/auth/auth.context";
+import { RedirectCB } from "./Redirects";
+// import { RedirectSsoSignIn } from "./Redirects";
 
 export type AuthStatus = 'init' | 'authCode' | 'success' | 'error'
 
 export const SignOutHandler = () => {
-  const { signIn } = useAuth()
-  useEffect(() => {
-    signIn();
-  }, [])
-
-  return <></>
+  return <>
+    <RedirectCB />
+    {/* <RedirectSsoSignIn /> */}
+  </>
 }

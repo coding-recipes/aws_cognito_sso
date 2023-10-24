@@ -17,40 +17,38 @@ const useAuthStore = create<AuthStoreState>(() => ({
   tokens: {},
 }))
 
-export const setTokens = (tokens: Tokens) => {
+export const authSetTokens = (tokens: Tokens) => {
   lsWriteTokens(tokens)
   useAuthStore.setState({ tokens })
 }
 
-export const getTokens = () => {
+export const authGetTokens = () => {
   return useAuthStore.getState().tokens
 }
 
-const clearTokens = () => {
+export const authSignOut = (callbackPage?: string) => {
   lsClearTokens();
-  setTokens({})
+  authSetTokens({})
+  redirectToSSOsignOut(callbackPage)
 }
 
-const requestTokens = async (authCode: string) => {
-  const { accessToken, refreshToken, idToken } = await getRequestUnAuth<Tokens>(getTokensReqInputs(authCode));
-  setTokens({ accessToken, refreshToken, idToken })
-}
-
-const initTokens: VoidFunction = () => {
-  const _tokens = lsReadTokens()
-  if (_tokens) setTokens(_tokens)
-}
-
-export const signOut = () => {
-  clearTokens();
-  redirectToSSOsignOut("/")
-}
-
-export const signIn = (callbackPage?: string) => {
+export const authSignIn = (callbackPage?: string) => {
   redirectToSSOsignIn(callbackPage)
 }
 
-const getAppCallbackPage = () => {
+const authRequestTokens = async (authCode: string) => {
+  const { accessToken, refreshToken, idToken } = await getRequestUnAuth<Tokens>(getTokensReqInputs(authCode));
+  authSetTokens({ accessToken, refreshToken, idToken })
+}
+
+const authInitTokens: VoidFunction = () => {
+  const _tokens = lsReadTokens()
+  if (_tokens) authSetTokens(_tokens)
+}
+
+
+
+const authCallbackPage = () => {
   return getCBPage()
 }
 
@@ -61,6 +59,14 @@ export const useAuth = () => {
     return !!tokens?.accessToken;
   }, [tokens]);
 
-  return { isLoggedIn, tokens, getTokens, setTokens, signIn, signOut, initTokens, clearTokens, requestTokens, getAppCallbackPage } as const;
+  const getTokens = authGetTokens;
+  const setTokens = authSetTokens;
+  const signIn = authSignIn;
+  const signOut = authSignOut;
+  const initTokens = authInitTokens;
+  const requestTokens = authRequestTokens;
+  const getAuthCallbackPage = authCallbackPage;
+
+  return { isLoggedIn, tokens, getTokens, setTokens, signIn, signOut, initTokens, requestTokens, getAuthCallbackPage } as const;
 }
 
