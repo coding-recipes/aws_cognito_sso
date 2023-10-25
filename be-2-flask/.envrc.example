@@ -1,0 +1,7 @@
+export PORT=8000
+
+export COGNITO_POOL_ID="eu-central-1_xxxxxx"
+export COGNITO_CLIENT_ID="1brdf2h3pxxxxxxxxxxxxx"
+export COGNITO_CLIENT_SECRET="1j41cpmnmh87244pj93jxxxxxxxxxxxxxxxxxxxxxx"
+export COGNITO_CLIENT_DOMAIN="xxxxxxxxxxxxxxxx"
+export COGNITO_CLIENT_REGION="eu-central-1"
