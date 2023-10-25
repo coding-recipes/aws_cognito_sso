@@ -1,6 +1,9 @@
 import { UserIdentity } from "@/auth";
+import { ApiProperty } from '@nestjs/swagger';
 
-export interface UserResponse {
+export class UserResponse {
+  @ApiProperty()
   identity: UserIdentity;
+  @ApiProperty()
   data: any;
 }

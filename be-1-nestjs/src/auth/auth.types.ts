@@ -1,5 +1,4 @@
 import { Request } from 'express';
-
 export interface UserIdentity {
   sub: string;
   userName: string;
