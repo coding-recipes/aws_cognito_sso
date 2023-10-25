@@ -37,6 +37,8 @@ lerna-debug.log*
 # /db
 
 .env
+.env.*
+!.env.example
 .vscode
 
 

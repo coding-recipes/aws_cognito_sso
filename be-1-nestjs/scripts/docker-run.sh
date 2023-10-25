@@ -1,0 +1,1 @@
+docker run -d --name cognito-sso-be1-nestjs -p 8000:80 cognito-sso-be1-nestjs
