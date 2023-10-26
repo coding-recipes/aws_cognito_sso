@@ -1,5 +1,5 @@
 {
-  "name": "lottery-simulator",
+  "name": "cognito-sso-demo__react-ui",
   "private": true,
   "version": "0.0.1",
   "type": "module",
@@ -8,8 +8,8 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "deploy:local": "bash deploy.local.sh",
-    "deploy": "bash deploy.sh"
+    "deploy1": "bash deploy.sh be1",
+    "deploy2": "bash deploy.sh be2"
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.1",

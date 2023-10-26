@@ -1,29 +1,26 @@
-# if [ "$1" != "dev" ] && [ "$1" != "prod" ]; then
-#   echo "----- ERR: \$1 should be either 'dev' or 'prod' -----"
-#   exit 1
-# fi
-
-# source .env.$1
-soruce .env
-
-PROFILE=$2 
-if [ -z "${VAR}" ]; then
-  PROFILE="default"
-fi
-
-echo "----- S3 bucket: $S3_BUCKET"
-echo "----- CLF_DIST: $CLF_DIST"
-echo "----- PROFILE: $PROFILE"
-
-if [ ! -d "./dist" ]; then
-  echo "ERR: dist directory not found"
+if [ "$1" != "be1" ] && [ "$1" != "be2" ]; then
+  echo "----- ERR: \$1 should be either 'be1' or 'be2' -----"
   exit 1
 fi
 
+source .env.$1
+
+echo "----- S3 bucket: $S3_BUCKET"
+echo "----- S3 folder: $S3_FOLDER"
+echo "----- CLF_DIST: $CLF_DIST"
+echo "----- PROFILE: $PROFILE"
+
+# if [ ! -d "./dist" ]; then
+  # echo "ERR: dist directory not found"
+  # yarn build
+# fi
+
+rm -rf dist
+yarn build \-\-mode $1
 cd dist
 
 echo "----- Deploying to S3 bucket: $S3_BUCKET"
-aws s3 sync . s3://$S3_BUCKET/ --profile $PROFILE
+aws s3 sync . s3://$S3_BUCKET/$S3_FOLDER/ --profile $PROFILE
 
 echo "----- Setting cache-control to 0"
 aws s3 cp index.html s3://$S3_BUCKET/index.html --cache-control max-age=0 --profile $PROFILE
