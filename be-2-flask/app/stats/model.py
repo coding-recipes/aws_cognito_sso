@@ -1,7 +1,7 @@
 from datetime import datetime
 from typing import Any
 from sqlalchemy import String, Integer, Float, DateTime, Column, BigInteger
-from app.db import Base
+from db import Base
 
 
 class Stat(Base):

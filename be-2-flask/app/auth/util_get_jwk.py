@@ -1,6 +1,6 @@
 import requests
 from typing import TypedDict
-from app.config import COGNITO_CLIENT_REGION, COGNITO_POOL_ID
+from config import COGNITO_CLIENT_REGION, COGNITO_POOL_ID
 
 
 class JsonWebKey(TypedDict):

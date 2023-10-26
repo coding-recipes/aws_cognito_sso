@@ -1,5 +1,5 @@
-from .db import Base, get_db_engine
-from app.stats import StatService
+from db import Base, get_db_engine
+from stats import StatService
 
 
 def init_database():

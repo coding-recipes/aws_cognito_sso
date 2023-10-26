@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from app.auth import UserIdentity
+from auth import UserIdentity
 from typing import Any
 
 

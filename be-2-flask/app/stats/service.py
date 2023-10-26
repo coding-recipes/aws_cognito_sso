@@ -1,5 +1,5 @@
 from .model import Stat
-from app.db import get_session
+from db import get_session
 from .mock import generate_records
 from .dto import StatRecord
 

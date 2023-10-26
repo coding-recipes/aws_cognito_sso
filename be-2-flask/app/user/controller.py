@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_openapi3 import OpenAPI
-from app.auth import auth_guard, UserIdentity
+from auth import auth_guard, UserIdentity
 from .types import UserData
 
 

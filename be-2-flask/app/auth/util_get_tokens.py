@@ -1,7 +1,7 @@
 from typing import TypedDict
 import requests
 import base64
-from app.config import (
+from config import (
     COGNITO_CLIENT_DOMAIN,
     COGNITO_CLIENT_ID,
     COGNITO_CLIENT_REGION,
