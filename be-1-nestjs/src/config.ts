@@ -10,8 +10,8 @@ export const config = () => ({
     synchronize: process.env.DATABASE_SYNC == "true",
     dropSchema: false,
     logging: false,
-    entities: ['dist/entity/*.js', 'dist/entities/*.js', 'dist/**/*.entity.js'],
-    migrations: ["dist/migration/*.js"],
+    entities: ['dist/**/*.entity.js', '**/*.entity.js'],
+    migrations: ["dist/migration/*.js", "migration/*.js"],
     // subscribers: ['dist/subscriber/**/*.js']
     // cli: { migrationsDir: "migration" }
   },

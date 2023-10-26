@@ -3,7 +3,7 @@
 import { promisify } from 'util';
 import * as Axios from 'axios';
 import * as jsonwebtoken from 'jsonwebtoken';
-import * as jwkToPem from 'jwk-to-pem';
+import jwkToPem from 'jwk-to-pem';
 import { config } from '@/config'
 
 
@@ -68,7 +68,7 @@ const getPublicKeys = async (): Promise<MapOfKidToPublicKey> => {
     console.log('...COGNITO --> getPublicKeys')
     const publicKeys = await Axios.default.get<PublicKeys>(url);
     cacheKeys = publicKeys.data.keys.reduce((agg, current) => {
-      const pem = jwkToPem(current);
+      const pem = jwkToPem(current as jwkToPem.JWK)
       agg[current.kid] = { instance: current, pem };
       return agg;
     }, {} as MapOfKidToPublicKey);
