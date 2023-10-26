@@ -15,6 +15,10 @@ app = OpenAPI(__name__)
 app.config.from_pyfile("config.py")
 CORS(app, expose_headers=["X-Access-Token", "X-Refresh-Token"])
 
+@app.get("/")
+async def req_root():
+  return "The app is running!"
+
 auth_routes(app)
 user_routes(app)
 stats_routes(app)

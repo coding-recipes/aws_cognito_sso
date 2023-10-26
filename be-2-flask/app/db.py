@@ -6,7 +6,6 @@ from sqlalchemy.orm import Session, DeclarativeBase
 
 __engine: Engine = None
 
-
 class Base(DeclarativeBase):
     pass
 

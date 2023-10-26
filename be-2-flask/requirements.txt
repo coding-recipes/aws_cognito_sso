@@ -28,6 +28,7 @@ pydantic==1.10.13
 python-jose==3.3.0
 requests==2.31.0
 rsa==4.9
+serverless-wsgi==3.0.3
 six==1.16.0
 SQLAlchemy==2.0.22
 typing_extensions==4.8.0
