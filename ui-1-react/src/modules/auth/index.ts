@@ -1,1 +1,1 @@
-export { useAuth, authGetTokens, authSetTokens, authSignIn, authSignOut } from './auth.context'
+export { useAuth, authGetTokens, authPutTokens, authPatchTokens, authSignIn, authSignOut } from './auth.context'

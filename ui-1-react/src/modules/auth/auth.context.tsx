@@ -17,9 +17,19 @@ const useAuthStore = create<AuthStoreState>(() => ({
   tokens: {},
 }))
 
-export const authSetTokens = (tokens: Tokens) => {
+export const authPutTokens = (tokens: Tokens) => {
   lsWriteTokens(tokens)
   useAuthStore.setState({ tokens })
+}
+
+export const authPatchTokens = (tokens: Partial<Tokens>) => {
+  let newTokens = { ...useAuthStore.getState().tokens }
+  Object.keys(tokens).forEach(key => {
+    if (tokens[key as keyof Tokens]) {
+      newTokens[key as keyof Tokens] = tokens[key as keyof Tokens]
+    }
+  })
+  authPutTokens(newTokens)
 }
 
 export const authGetTokens = () => {
@@ -28,7 +38,7 @@ export const authGetTokens = () => {
 
 export const authSignOut = (callbackPage?: string) => {
   lsClearTokens();
-  authSetTokens({})
+  authPutTokens({})
   redirectToSSOsignOut(callbackPage)
 }
 
@@ -38,12 +48,12 @@ export const authSignIn = (callbackPage?: string) => {
 
 const authRequestTokens = async (authCode: string) => {
   const { accessToken, refreshToken, idToken } = await getRequestUnAuth<Tokens>(getTokensReqInputs(authCode));
-  authSetTokens({ accessToken, refreshToken, idToken })
+  authPutTokens({ accessToken, refreshToken, idToken })
 }
 
 const authInitTokens: VoidFunction = () => {
   const _tokens = lsReadTokens()
-  if (_tokens) authSetTokens(_tokens)
+  if (_tokens) authPutTokens(_tokens)
 }
 
 
@@ -60,13 +70,14 @@ export const useAuth = () => {
   }, [tokens]);
 
   const getTokens = authGetTokens;
-  const setTokens = authSetTokens;
+  const putTokens = authPutTokens;
+  const patchTokens = authPatchTokens;
   const signIn = authSignIn;
   const signOut = authSignOut;
   const initTokens = authInitTokens;
   const requestTokens = authRequestTokens;
   const getAuthCallbackPage = authCallbackPage;
 
-  return { isLoggedIn, tokens, getTokens, setTokens, signIn, signOut, initTokens, requestTokens, getAuthCallbackPage } as const;
+  return { isLoggedIn, tokens, getTokens, putTokens, patchTokens, signIn, signOut, initTokens, requestTokens, getAuthCallbackPage } as const;
 }
 
