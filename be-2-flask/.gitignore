@@ -1,6 +1,7 @@
 .venv
 .vscode
 .envrc
+requirements_r.txt
 
 __pycache__
 */__pycache__/

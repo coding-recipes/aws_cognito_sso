@@ -12,7 +12,7 @@ def info_routes(app: OpenAPI):
     @app.get("/info/server", responses={200: ServerInfo})
     def req_server_info():
         return  {
-            "swagger": "/openapi/swagger",
+            "swagger": "/openapi",
             "framework": "Flask",
             "version": "0.0.1",
             "language": "Python3",
