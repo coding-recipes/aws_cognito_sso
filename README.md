@@ -5,17 +5,6 @@ The solution consists of 3 parts:
 (2) Backend API for authentication/authorization and common CRUD tasks - multiple implementation (NestJs, Flask)  
 (3) Frontend APP - multiple implementation (React)
 
-**Authentication/Authorization mechanish**  
-1) when the unauthenticated user (without tokens) enters the site he/she will see a welcome page with a login button which redirects him/her to the Cognito Hosted UI
-2) the user signs in or signs up on the Hosted UI, then is redirected to the Application UI with a Cognito Authentication Code in the URL (eg. `http://localhost:3000/signin?code=1234xyz`)
-3) the UI will send the Authentication Code for the API and exchange it for an Access Token and a Refresh Token
-4) the user/UI can then make a normal API request (eg. `GET /stats`)
-5) the Access Token and the Refresh token will be sent in the request headers section
-5) the API will validate the Access Token for every request
-6) in case the Access Token is expired, the backend will ask for a new Access Token from Cognito service using the user's Refresh Token
-7) the API returns the response (including the newly created Access Token)
-8) the UI App saves the new Access Token
-
 ### Application Code / Repo Folders
 `/be-1-nestjs`: backend NodeJs / NestJs implementation  
 `/be-2-flask`: backend NodeJs / NestJs implementation  
@@ -31,9 +20,26 @@ the `/infra` folder is another linked repository, which contains the infrastruct
 
 private repository location: [Infrastructure Code](https://github.com/coding-recipes/infra_aws_cognito_sso)  
 
-### Launch locally / on your own
-1) create a Cognito User Pool with hosted UI and Client Secret.
+### Launch locally
+1) create a Cognito User Pool with hosted UI and Client Secret
 2) Setup Cognito Client sign-in and sign-out callback endpoints for `http://localhost:3000/signin` and `http://localhost:3000/signout`
 3) Collect Cognito properties: `Pool ID`, `Client ID`, `Client Secret`, `Hosted UI Domain`, `Region`
 4) Launch (any) backend API locally on port 8000 (default). Set environment variables (`.env` or `.envrc` file) according to Cognito properties
 5) Launch (any) frontend UI locally on port 3000 (default). Set environment variables (`.env` file) and server URL (eg. `http://localhost:8000`)
+
+
+### Authentication/Authorization mechanish  
+1) the (unauthenticated = w/o tokens) user visits Application website
+2) the user is redirected to the Cognito Hosted UI in order to sign in (or sign up)
+3) the user is redirected back to the Application UI with a Cognito Authorization Code in the URL (eg. `http://localhost:3000/signin?code=1234xyz`)
+4) the UI exchanges the Authorization Code with the API for an Access Token and a Refresh Token 
+   - the UI sends the Code for the Server (API)
+   - the Server exchanges the Authorization Code with Cognito API for the tokens
+   - the API returns the tokes for the UI
+5) the user/UI makes normal API requests (eg. `GET /stats`) with the Access Tokens and the Refresh Token sent in the request headers
+6) the Server validates the Access Token JWT with the appropriate Cognito Public Key (JWK)
+7) in case the Access Token is expired, the Server asks for a new Access Token from Cognito service using the Refresh Token
+8) the API returns the response (including the newly created Access Token)
+8) the UI App saves the new Access Token
+
+![Cognito SSO](/docs/Cognito_SSO.png "Cognito SSO")
