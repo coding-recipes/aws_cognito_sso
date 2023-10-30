@@ -1,7 +1,10 @@
 {
-  "name": "cognito-sso-demo__react-ui",
-  "private": true,
+  "name": "cognito-sso-dedemo-frontend-react",
   "version": "0.0.1",
+  "description": "Cognito SSO - React UI",
+  "private": true,
+  "author": "Peter Maczo",
+  "license": "Apache-2.0",
   "type": "module",
   "scripts": {
     "dev": "vite",

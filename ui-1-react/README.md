@@ -1,10 +1,7 @@
 ## Cognito SSO Demo - React UI
 
 ### Application
-... coming soon
-
-### Demo Site
-... coming soon
+This is the React UI implementation of the Cognito SSO demo stack. 
 
 ### Setup and Development 
 

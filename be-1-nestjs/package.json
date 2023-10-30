@@ -1,10 +1,10 @@
 {
-  "name": "be-1-nodejs-nests",
+  "name": "cognito-sso-dedemo-backend-nestjs",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Cognito SSO - NestJS Backend",
   "private": true,
-  "license": "UNLICENSED",
+  "author": "Peter Maczo",
+  "license": "Apache-2.0",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
