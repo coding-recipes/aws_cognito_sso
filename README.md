@@ -29,7 +29,7 @@ the `/infra` folder is another linked repository, which contains the infrastruct
 - Flask API (backend 2) hosted in AWS Lambda  
 - Multisite CloudFront-S3 distribution for frontend applications    
 
-private repository location: [Infrastructure Code](https://github.com/super-convincing/infra_aws_cognito_sso)  
+private repository location: [Infrastructure Code](https://github.com/coding-recipes/infra_aws_cognito_sso)  
 
 ### Launch locally / on your own
 1) create a Cognito User Pool with hosted UI and Client Secret.
