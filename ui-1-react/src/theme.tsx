@@ -27,6 +27,6 @@ export const theme = extendTheme({
     heading: ` 'Nunito', sans-serif`,
     body: ` 'Nunito', sans-serif`,
   },
-  styles: { global: { body: { bg: "#F2F2F2" } } }
+  // styles: { global: { body: { bg: "#F2F2F2" } } }
 })
 
