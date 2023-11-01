@@ -1,8 +1,9 @@
 import { useServerInfo } from "../../modules/resources";
 import { Loader } from "../atoms";
-import { Table, Tbody, Tr, Td, Th, TableContainer, Link } from '@chakra-ui/react'
+import { Table, Tbody, Tr, Td, Th, TableContainer } from '@chakra-ui/react'
 import { config } from '../../config'
 import { useMemo } from "react";
+import { MaskedLink } from "./utils"
 
 export const InfoTableServer = () => {
   return <>
@@ -19,7 +20,7 @@ export const InfoTableServer = () => {
   </>
 }
 
-export const InfoTableServerBody = () => {
+export const InfoTableServerBody = ({ maskLink = false }: { maskLink?: boolean }) => {
   const [useQuery] = useServerInfo() // [query, refresh
   const { status, data } = useQuery();
 
@@ -29,11 +30,6 @@ export const InfoTableServerBody = () => {
     return `${api_url}${data.swagger}`
   }, [data, config])
 
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
-
   return <>
     {status == "loading" && <Tr><Td colSpan={2} style={{ textAlign: "center" }}><Loader /></Td></Tr>}
     {status == "success" && <>
@@ -42,12 +38,12 @@ export const InfoTableServerBody = () => {
       <Tr><Th>Version</Th><Td>{data.version}</Td></Tr>
       <Tr><Th>Swagger</Th>
         <Td>
-          <Link href={swagger} isExternal onClick={handleClick}>open page &rarr;</Link>
+          <MaskedLink mask={maskLink} link={swagger} />
         </Td>
       </Tr>
       <Tr><Th>Repo</Th>
         <Td>
-          <Link href={data.repo} isExternal onClick={handleClick}>open page &rarr;</Link>
+          <MaskedLink mask={maskLink} link={data.repo} />
         </Td>
       </Tr>
 

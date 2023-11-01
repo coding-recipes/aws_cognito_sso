@@ -1,6 +1,6 @@
-import React from "react"
-import { Table, Tbody, Tr, Th, Td, TableContainer, Link } from '@chakra-ui/react'
+import { Table, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 import { uiInfo } from "../../config"
+import { MaskedLink } from "./utils"
 
 export const InfoTableUI = () => {
   return <>
@@ -14,16 +14,12 @@ export const InfoTableUI = () => {
   </>
 }
 
-export const InfoTableUIBody = () => {
-  const handleClick = (e: React.MouseEvent) => {
-    e.stopPropagation();
-  };
-
+export const InfoTableUIBody = ({ maskLink = false }: { maskLink?: boolean }) => {
   return <>
     <Tr><Th>Framework</Th><Td>{uiInfo.framework}</Td></Tr>
     <Tr><Th>Repo</Th>
       <Td>
-        <Link href={uiInfo.repo} isExternal onClick={handleClick}>open page &rarr;</Link>
+        <MaskedLink mask={maskLink} link={uiInfo.repo} />
       </Td>
     </Tr>
   </>
