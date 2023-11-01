@@ -11,4 +11,6 @@ COGNITO_CLIENT_SECRET = os.environ["COGNITO_CLIENT_SECRET"]
 COGNITO_CLIENT_DOMAIN = os.environ["COGNITO_CLIENT_DOMAIN"]
 COGNITO_CLIENT_REGION = os.environ["COGNITO_CLIENT_REGION"]
 
+REPO = os.environ["REPO"]
+
 DATABASE_URI = "sqlite://"  # in-memory database, comment this line to use a persistent database

@@ -31,6 +31,9 @@ export const config = () => ({
     clientSecret: process.env.COGNITO_CLIENT_SECRET,
     clientDomain: process.env.COGNITO_CLIENT_DOMAIN,
     clientRegion: process.env.COGNITO_CLIENT_REGION,
+  },
+  info: {
+    repo: process.env.REPO || '',
   }
 })
 

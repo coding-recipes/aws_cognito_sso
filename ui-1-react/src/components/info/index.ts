@@ -1,1 +1,2 @@
-export * from './ServerInfo'
+export * from './infoTableServer'
+export * from './infoPanel'

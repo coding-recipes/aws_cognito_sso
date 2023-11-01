@@ -1,5 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiCreatedResponse, ApiProperty } from '@nestjs/swagger';
+import { config } from '../config';
 class ServerInfo {
   @ApiProperty({ example: '/docs' })
   swagger: string = "/docs"
@@ -9,6 +10,8 @@ class ServerInfo {
   version: string = "0.0.1"
   @ApiProperty({ example: 'TypeScript' })
   language: string = "TypeScript"
+  @ApiProperty({ example: 'https://github.com/my-backend-repo' })
+  repo: string = config().info.repo
 }
 
 @Controller('info')

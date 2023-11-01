@@ -1,0 +1,86 @@
+.info_panel {
+  transition: all 0.5s ease-in-out;
+  background-color: #222;
+  color: white;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 10px;
+  padding: 10px 5px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+}
+
+.info_table {
+  border-collapse: collapse;
+}
+
+.info_table_container {
+  overflow-x: hidden !important;
+}
+
+.collapsed {
+  width: 40px;
+  height: 40px;
+}
+
+.full {
+  width: 290px;
+  height: 330px;
+}
+
+.collapse_icon {
+  float: right;
+  opacity: 0.2;
+}
+
+.collapse_icon:hover {
+  opacity: 1.0;
+}
+
+.info_table_divider {
+  opacity: 1.0;
+  padding: 15px 0px !important;
+}
+
+.info_table table td,
+.info_table table th {
+  border-bottom: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.info_table table th {
+  width: 120px;
+  max-width: 120px;
+}
+
+.info_table table td {
+  width: 160px;
+  max-width: 160px;
+}
+
+@keyframes appear {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.appear {
+  opacity: 0;
+  animation-name: appear;
+  animation-duration: 1s;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+}

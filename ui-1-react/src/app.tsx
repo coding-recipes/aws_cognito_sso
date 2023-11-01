@@ -5,6 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from './theme'
 import { QueryClient, QueryClientProvider } from "react-query";
 import { AppRoutes } from './routes'
+import { GlobalComponents } from './global'
 import { reactQueryConfig } from "./config";
 import './app.css'
 // import { ReactQueryDevtools } from "react-query/devtools";
@@ -17,6 +18,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <AppRoutes />
+          <GlobalComponents />
         </BrowserRouter>
         {/* <ReactQueryDevtools initialIsOpen /> */}
       </QueryClientProvider>

@@ -27,4 +27,5 @@ export interface ServerInfo {
   framework: string;
   version: string;
   language: string;
+  repo: string;
 }
