@@ -35,7 +35,7 @@ const InfoTable = () => {
         <Table size="sm">
           <Tbody>
             <Tr>
-              <Th>UI Info</Th>
+              <Th>Frontend</Th>
               <Td style={{ textAlign: "right" }}><CollapseIcon /></Td>
             </Tr>
             <InfoTableUIBody />
@@ -43,7 +43,7 @@ const InfoTable = () => {
               <Th colSpan={2} className={styles.info_table_divider}><Divider /></Th>
             </Tr>
             <Tr>
-              <Th colSpan={2} style={{ textAlign: "center" }}>Server Info</Th>
+              <Th>Backend</Th>
             </Tr>
             <InfoTableServerBody />
           </Tbody>

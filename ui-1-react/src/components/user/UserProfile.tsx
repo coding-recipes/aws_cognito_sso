@@ -1,6 +1,6 @@
 import { useCurrentUser } from "../../modules/resources";
 import { FullLoader } from "../atoms";
-import { Table, Tbody, Tr, Td, TableContainer } from '@chakra-ui/react'
+import { Table, Tbody, Tr, Th, Td, TableContainer } from '@chakra-ui/react'
 
 export const UserProfile = () => {
   const [useQuery] = useCurrentUser() // [query, refresh
@@ -13,26 +13,26 @@ export const UserProfile = () => {
         <Table size="sm">
           <Tbody>
             <Tr>
-              <Td><b>Identity</b></Td>
+              <Th colSpan={2} style={{ textAlign: "center" }}>Identity</Th>
             </Tr>
             <Tr>
-              <Td>Username</Td>
+              <Th>Username</Th>
               <Td>{data.identity.userName}</Td>
             </Tr>
             <Tr>
-              <Td>User ID</Td>
+              <Th>User ID</Th>
               <Td>{data.identity.sub}</Td>
             </Tr>
             <Tr>
-              <Td>Client ID</Td>
+              <Th>Client ID</Th>
               <Td>{data.identity.clientId}</Td>
             </Tr>
 
             <Tr>
-              <Td><b>Data</b></Td>
+              <Th colSpan={2} style={{ textAlign: "center" }}>Data</Th>
             </Tr>
             <Tr>
-              <Td>...</Td>
+              <Th>...</Th>
               <Td>...</Td>
             </Tr>
           </Tbody>

@@ -23,7 +23,7 @@ export const InfoTableUIBody = () => {
     <Tr><Th>Framework</Th><Td>{uiInfo.framework}</Td></Tr>
     <Tr><Th>Repo</Th>
       <Td>
-        <Link href={uiInfo.repo} isExternal onClick={handleClick}>{uiInfo.repo}</Link>
+        <Link href={uiInfo.repo} isExternal onClick={handleClick}>open page &rarr;</Link>
       </Td>
     </Tr>
   </>

@@ -1,70 +1,65 @@
+import { Button } from "@chakra-ui/react";
 import { Stat, useStats } from "../../modules/resources";
 import { FullLoader } from "../atoms";
-import { useMemo } from 'react';
+import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react'
 
-import Chart from 'chart.js/auto';
-import { CategoryScale } from 'chart.js';
-import { Line } from 'react-chartjs-2';
-
-Chart.register(CategoryScale);
 
 export const StatsTable = () => {
-  const [useQuery] = useStats() // [query, refresh
+  const [useQuery, refresh] = useStats() // [query, refresh
   const { status, data } = useQuery()
+
   return <>
     {status == "loading" && <FullLoader height="200px" />}
-    {status == "success" && <StatsCharts data={data.data} />}
+    {
+      status == "success" && <>
+        <StatsButtons {...{ refresh }} />
+        <StatsTable2 data={data.data} />
+      </>
+    }
   </>
 }
 
-interface IDataset {
-  label: string;
-  data: number[]
-}
-type ChartData = {
-  labels: string[],
-  datasets: IDataset[]
-}
-type Period = string
-type Value = number
-type TKPI = Record<Period, Value>
-type TKPIs = Record<string, TKPI>
-type Labels = string[]
-
-const createKpiDataSet = (label: string, labels: Labels, kpiData: TKPI): IDataset => {
-  const data = labels.map((p: string) => kpiData[p])
-  return { label, data }
-}
-const createChartDataSet = (labels: Labels, KPI: TKPIs): ChartData => {
-  const datasets = Object.keys(KPI).map((kpi: string) => createKpiDataSet(kpi, labels, KPI[kpi]))
-  return {
-    labels,
-    datasets
-  }
-}
-
-const tranformData = (data: Stat[]): ChartData => {
-  const KPI: TKPIs = {}
-  const labelsS: Set<string> = new Set()
-  data.forEach((row: Stat) => {
-    const { kpi, period, value } = row
-    KPI[kpi] = KPI[kpi] ?? {}
-    KPI[kpi][period] = value
-    labelsS.add(period)
-  })
-  const labels = [...labelsS].sort()
-  const chartDataSet = createChartDataSet(labels, KPI)
-  return chartDataSet
-}
-
-const StatsCharts = ({ data }: { data: Stat[] }) => {
-  const chartData = useMemo(() => {
-    return tranformData(data)
-  }, [data])
-
+const StatsButtons = ({ refresh }: { refresh: VoidFunction }) => {
   return <>
-    <Line
-      data={chartData}
-    />
+    <div>
+      <Button onClick={refresh} colorScheme='blue' variant='outline' size={"sm"}>Refresh</Button>
+    </div>
+  </>
+}
+
+
+const StatsTable2 = ({ data }: { data: Stat[] }) => {
+  return <>
+    <TableContainer>
+      <Table variant="striped" size='sm' width={"500px"}>
+        <TableCaption>Nice KPI values</TableCaption>
+        <Thead>
+          <Tr>
+            <Th width={"50px"}>#</Th>
+            <Th width={"350px"}>KPI</Th>
+            <Th width={"50px"}>Period</Th>
+            <Th width={"50px"}>Value</Th>
+          </Tr>
+        </Thead>
+        <Tbody>
+          {
+            data.map((stat) => {
+              return <TableRow key={stat.id} data={stat} />
+            })
+          }
+        </Tbody>
+      </Table>
+    </TableContainer>
+  </>
+}
+
+const TableRow = ({ data }: { data: Stat }) => {
+  return <>
+    <Tr>
+      <Td>{data.id}</Td>
+      <Td>{data.kpi}</Td>
+      <Td>{data.period}</Td>
+      <Td isNumeric>{data.value}</Td>
+    </Tr>
   </>
 }

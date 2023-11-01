@@ -9,6 +9,9 @@ export const InfoTableServer = () => {
     <TableContainer>
       <Table size="sm">
         <Tbody>
+          <Tr>
+            <Th colSpan={2} style={{ textAlign: "center" }}>Server Info</Th>
+          </Tr>
           <InfoTableServerBody />
         </Tbody>
       </Table>
@@ -39,12 +42,12 @@ export const InfoTableServerBody = () => {
       <Tr><Th>Version</Th><Td>{data.version}</Td></Tr>
       <Tr><Th>Swagger</Th>
         <Td>
-          <Link href={swagger} isExternal onClick={handleClick}>{swagger}</Link>
+          <Link href={swagger} isExternal onClick={handleClick}>open page &rarr;</Link>
         </Td>
       </Tr>
       <Tr><Th>Repo</Th>
         <Td>
-          <Link href={data.repo} isExternal onClick={handleClick}>{data.repo}</Link>
+          <Link href={data.repo} isExternal onClick={handleClick}>open page &rarr;</Link>
         </Td>
       </Tr>
 
