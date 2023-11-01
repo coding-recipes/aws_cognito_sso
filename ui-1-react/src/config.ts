@@ -15,6 +15,10 @@ export const reactQueryConfig: DefaultOptions = {
   },
 }
 
+export const uiInfo = {
+  framework: "React",
+  repo: "https://github.com/coding-recipes/aws_cognito_sso/tree/main/ui-1-react"
+}
 
 export const config = () => ({
   cognito_region: VITE_COGNITO_REGION,
@@ -30,11 +34,6 @@ export const config = () => ({
   api_route_get_token: "/auth/get-tokens",
 
   store_callbackPage: "authCallbackPage",
-
-  ui_info: {
-    framework: "React",
-    repo: "https://github.com/coding-recipes/aws_cognito_sso/tree/main/ui-1-react"
-  }
 })
 
 export type Config = ReturnType<typeof config>;

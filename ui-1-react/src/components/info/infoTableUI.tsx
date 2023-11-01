@@ -1,6 +1,6 @@
-import React, { useMemo } from "react"
+import React from "react"
 import { Table, Tbody, Tr, Th, Td, TableContainer, Link } from '@chakra-ui/react'
-import { config, Config } from "../../config"
+import { uiInfo } from "../../config"
 
 export const InfoTableUI = () => {
   return <>
@@ -15,19 +15,15 @@ export const InfoTableUI = () => {
 }
 
 export const InfoTableUIBody = () => {
-  const ui_info: Config["ui_info"] = useMemo(() => {
-    return config().ui_info
-  }, [])
-
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
   };
 
   return <>
-    <Tr><Th>Framework</Th><Td>{ui_info.framework}</Td></Tr>
+    <Tr><Th>Framework</Th><Td>{uiInfo.framework}</Td></Tr>
     <Tr><Th>Repo</Th>
       <Td>
-        <Link href={ui_info.repo} isExternal onClick={handleClick}>{ui_info.repo}</Link>
+        <Link href={uiInfo.repo} isExternal onClick={handleClick}>{uiInfo.repo}</Link>
       </Td>
     </Tr>
   </>

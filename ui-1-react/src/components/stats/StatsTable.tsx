@@ -1,18 +1,12 @@
 import { Button } from "@chakra-ui/react";
-import { useQuery, useQueryClient } from "react-query";
-import { getStats, Stat } from "../../modules/resources";
+import { Stat, useStats } from "../../modules/resources";
 import { FullLoader } from "../atoms";
 import { Table, Thead, Tbody, Tr, Th, Td, TableCaption, TableContainer } from '@chakra-ui/react'
 
-const STATS_QUERY_KEY = "stats"
 
 export const StatsTable = () => {
-  const queryClient = useQueryClient()
-  const { status, data } = useQuery(STATS_QUERY_KEY, getStats);
-
-  const refresh = () => {
-    queryClient.invalidateQueries(STATS_QUERY_KEY)
-  }
+  const [useQuery, refresh] = useStats() // [query, refresh
+  const { status, data } = useQuery()
 
   return <>
     {status == "loading" && <FullLoader height="200px" />}

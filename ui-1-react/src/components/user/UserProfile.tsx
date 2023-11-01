@@ -1,12 +1,10 @@
-import { useQuery } from "react-query";
-import { getCurrentUser } from "../../modules/resources";
+import { useCurrentUser } from "../../modules/resources";
 import { FullLoader } from "../atoms";
 import { Table, Tbody, Tr, Td, TableContainer } from '@chakra-ui/react'
 
-const USER_QUERY_KEY = "user"
-
 export const UserProfile = () => {
-  const { status, data } = useQuery(USER_QUERY_KEY, getCurrentUser);
+  const [useQuery] = useCurrentUser() // [query, refresh
+  const { status, data } = useQuery();
 
   return <>
     {status == "loading" && <FullLoader height="200px" />}

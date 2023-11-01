@@ -1,11 +1,8 @@
-import { useQuery } from "react-query";
-import { getServerInfo } from "../../modules/resources";
+import { useServerInfo } from "../../modules/resources";
 import { Loader } from "../atoms";
 import { Table, Tbody, Tr, Td, Th, TableContainer, Link } from '@chakra-ui/react'
 import { config } from '../../config'
 import { useMemo } from "react";
-
-const USER_QUERY_KEY = "server"
 
 export const InfoTableServer = () => {
   return <>
@@ -20,7 +17,8 @@ export const InfoTableServer = () => {
 }
 
 export const InfoTableServerBody = () => {
-  const { status, data } = useQuery(USER_QUERY_KEY, getServerInfo);
+  const [useQuery] = useServerInfo() // [query, refresh
+  const { status, data } = useQuery();
 
   const swagger = useMemo(() => {
     const { api_url } = config()
