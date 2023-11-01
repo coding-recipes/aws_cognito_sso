@@ -4,7 +4,7 @@ import { addRequestTokens } from "./util.tokens";
 import { GeneralRequestProps } from "./types";
 
 export const getUrl = (route: string) => {
-  return config().api_url + route;
+  return config.api_url + route;
 }
 
 export const handleRequest = async <T>({ method, route, params = {}, headers = {} }: GeneralRequestProps): Promise<AxiosResponse<T>> => {

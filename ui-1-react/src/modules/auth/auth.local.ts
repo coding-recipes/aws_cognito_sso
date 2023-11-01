@@ -3,7 +3,7 @@ import { config } from "../../config";
 import { Tokens } from "./auth.context";
 
 export const setCBPage = (callbackPage: string) => {
-  const { store_callbackPage, sso_signin_redirect_route, sso_signout_redirect_route } = config();
+  const { store_callbackPage, sso_signin_redirect_route, sso_signout_redirect_route } = config;
   if (!callbackPage || [sso_signin_redirect_route, sso_signout_redirect_route].includes(callbackPage)) {
     callbackPage = "/"
   }
@@ -11,7 +11,7 @@ export const setCBPage = (callbackPage: string) => {
 }
 
 export const getCBPage = () => {
-  const { store_callbackPage } = config();
+  const { store_callbackPage } = config;
   return LocalStore.get(store_callbackPage) || "";
 }
 

@@ -25,7 +25,7 @@ export const InfoTableServerBody = ({ maskLink = false }: { maskLink?: boolean }
   const { status, data } = useQuery();
 
   const swagger = useMemo(() => {
-    const { api_url } = config()
+    const { api_url } = config
     if (!data) return ""
     return `${api_url}${data.swagger}`
   }, [data, config])

@@ -20,7 +20,7 @@ export const uiInfo = {
   repo: "https://github.com/coding-recipes/aws_cognito_sso/tree/main/ui-1-react"
 }
 
-export const config = () => ({
+export const config = {
   cognito_region: VITE_COGNITO_REGION,
   cognito_domain_name: VITE_COGNITO_CLIENT_DOMAIN,
   cognito_client_id: VITE_COGNITO_CLIENT_ID,
@@ -34,6 +34,6 @@ export const config = () => ({
   api_route_get_token: "/auth/get-tokens",
 
   store_callbackPage: "authCallbackPage",
-})
+}
 
-export type Config = ReturnType<typeof config>;
+export type Config = typeof config;
